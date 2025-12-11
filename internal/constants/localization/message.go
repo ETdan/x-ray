@@ -1,0 +1,25 @@
+package localization
+
+const (
+	MsgUserLoginSuccessful          = "User login successful"
+	MsgResponseCodeNotFound         = "Internal Response code not found or mismatch"
+	MsgInvalidCallBackRequest       = "invalid or malformed callback request sent"
+	MsgAuthStateStringMismatch      = "auth state string mismatch"
+	MsgLoginFailed                  = "login failed"
+	MsgErrorFetchingUser            = "error fetching user"
+	MsgErrorCreatingUser            = "error creating user"
+	MsgUserAlreadyExists            = "user already exists"
+	MsgRecordNotFound               = "record not found"
+	MsgErrorGeneratingAccessToken   = "error generating access token"
+	MsgUserUnauthorized             = "user unauthorized"
+	MsgErrorRefreshTokenNotFound    = "refresh token not found"
+	MsgAccessTokenRefreshSuccessful = "access token refresh successful"
+	MsgCompanyNotFound              = "company not found"
+	MsgCompanyAlreadyExists         = "company already exists"
+	MsgInterviewNotFound            = "interview not found"
+	MsgErrorCreatingInterview       = "error creating interview"
+	MsgErrorCreatingSalary          = "error creating salary"
+	MessageErrorFetchingSalaries    = "error fetching salaries"
+	MsgErrorCreatingReview          = "error creating review"
+	MessageErrorFetchingReviews     = "error fetching reviews"
+)
