@@ -15,6 +15,28 @@ type companyHandler struct {
 	service service.CompanyService
 }
 
+// CreateCompany creates a new company with logo and album images
+//
+//	@Summary		Create Company
+//	@Description	Creates a new company with details, logo, and album images (multipart form data)
+//	@Tags			Company
+//	@Accept			multipart/form-data
+//	@Produce		json
+//	@Security		BearerAuth
+//	@Param			name			formData	string							true	"Company name"
+//	@Param			website			formData	string							false	"Company website URL"
+//	@Param			industry		formData	string							false	"Industry type"
+//	@Param			size			formData	string							false	"Company size"
+//	@Param			headquarters	formData	string							false	"Headquarters location"
+//	@Param			description		formData	string							false	"Company description"
+//	@Param			logo			formData	file							false	"Company logo image"
+//	@Param			album			formData	file							false	"Company album images (multiple files)"
+//	@Success		200				{object}	localization.StandardResponse	"Company created successfully"
+//	@Failure		400				{object}	localization.StandardResponse	"Invalid request body or form data"
+//	@Failure		401				{object}	localization.StandardResponse	"Unauthorized - user not authenticated"
+//	@Failure		500				{object}	localization.StandardResponse	"Internal server error"
+//	@Router			/company [post]
+//
 // CreateCompany implements [port.CompanyHandler].
 func (c *companyHandler) CreateCompany(ctx *fiber.Ctx) {
 	var req dto.CreateCompanyReq
@@ -53,6 +75,22 @@ func (c *companyHandler) CreateCompany(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessCompanyCreated.Code, nil)
 }
 
+// GetCompaniesByPagination retrieves companies with pagination and filtering
+//
+//	@Summary		Get Companies by Pagination
+//	@Description	Retrieves a paginated list of companies with optional filters
+//	@Tags			Company
+//	@Accept			json
+//	@Produce		json
+//	@Param			page	query		int														false	"Page number"		default(1)
+//	@Param			limit	query		int														false	"Items per page"	default(10)
+//	@Param			sort	query		string													false	"Sort field"
+//	@Param			order	query		string													false	"Sort order (asc/desc)"
+//	@Success		200		{object}	localization.StandardResponse{data=[]dto.CompanyRes}	"Companies fetched successfully"
+//	@Failure		400		{object}	localization.StandardResponse							"Invalid filter parameters"
+//	@Failure		500		{object}	localization.StandardResponse							"Internal server error"
+//	@Router			/company [get]
+//
 // GetCompaniesByPagination implements [port.CompanyHandler].
 func (c *companyHandler) GetCompaniesByPagination(ctx *fiber.Ctx) {
 	q := ctx.Queries()
@@ -73,6 +111,20 @@ func (c *companyHandler) GetCompaniesByPagination(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessCompaniesFetched.Code, companies)
 }
 
+// GetCompanyByID retrieves a specific company by ID
+//
+//	@Summary		Get Company by ID
+//	@Description	Retrieves detailed information about a specific company
+//	@Tags			Company
+//	@Accept			json
+//	@Produce		json
+//	@Param			company_id	query		string												true	"Company ID (UUID)"
+//	@Success		200			{object}	localization.StandardResponse{data=dto.CompanyRes}	"Company fetched successfully"
+//	@Failure		400			{object}	localization.StandardResponse						"Missing company_id parameter"
+//	@Failure		404			{object}	localization.StandardResponse						"Company not found"
+//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/company/detail [get]
+//
 // GetCompanyByID implements [port.CompanyHandler].
 func (c *companyHandler) GetCompanyByID(ctx *fiber.Ctx) {
 	q := ctx.Queries()

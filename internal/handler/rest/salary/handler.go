@@ -15,6 +15,22 @@ type salaryHandler struct {
 	service service.SalaryService
 }
 
+// GetSalariesByPagination retrieves salaries with pagination and filtering
+//
+//	@Summary		Get Salaries by Pagination
+//	@Description	Retrieves a paginated list of salaries with optional filters
+//	@Tags			Salary
+//	@Accept			json
+//	@Produce		json
+//	@Param			page	query		int													false	"Page number"		default(1)
+//	@Param			limit	query		int													false	"Items per page"	default(10)
+//	@Param			sort	query		string												false	"Sort field"
+//	@Param			order	query		string												false	"Sort order (asc/desc)"
+//	@Success		200		{object}	localization.StandardResponse{data=[]dto.SalaryRes}	"Salaries fetched successfully"
+//	@Failure		400		{object}	localization.StandardResponse						"Invalid filter parameters"
+//	@Failure		500		{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/salary [get]
+//
 // GetSalariesByPagination implements [port.SalaryHandler].
 func (u *salaryHandler) GetSalariesByPagination(ctx *fiber.Ctx) {
 	q := ctx.Queries()
@@ -33,6 +49,23 @@ func (u *salaryHandler) GetSalariesByPagination(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessSalaryCreated.Code, salaries)
 }
 
+// GetSalaryByCompanyID retrieves all salaries for a specific company
+//
+//	@Summary		Get Salaries by Company ID
+//	@Description	Retrieves all salary information for a specific company with pagination
+//	@Tags			Salary
+//	@Accept			json
+//	@Produce		json
+//	@Param			company_id	path		string												true	"Company ID (UUID)"
+//	@Param			page		query		int													false	"Page number"		default(1)
+//	@Param			limit		query		int													false	"Items per page"	default(10)
+//	@Param			sort		query		string												false	"Sort field"
+//	@Param			order		query		string												false	"Sort order (asc/desc)"
+//	@Success		200			{object}	localization.StandardResponse{data=[]dto.SalaryRes}	"Salaries fetched successfully"
+//	@Failure		400			{object}	localization.StandardResponse						"Missing company_id or invalid filter parameters"
+//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/salary/company/{company_id} [get]
+//
 // GetSalaryByCompanyID implements [port.SalaryHandler].
 func (u *salaryHandler) GetSalaryByCompanyID(ctx *fiber.Ctx) {
 	companyID := ctx.Params("company_id")
@@ -56,6 +89,20 @@ func (u *salaryHandler) GetSalaryByCompanyID(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessSalaryCreated.Code, salaries)
 }
 
+// GetSalaryByID retrieves a specific salary entry by ID
+//
+//	@Summary		Get Salary by ID
+//	@Description	Retrieves detailed information about a specific salary entry
+//	@Tags			Salary
+//	@Accept			json
+//	@Produce		json
+//	@Param			salary_id	path		string												true	"Salary ID (UUID)"
+//	@Success		200			{object}	localization.StandardResponse{data=dto.SalaryRes}	"Salary fetched successfully"
+//	@Failure		400			{object}	localization.StandardResponse						"Missing salary_id parameter"
+//	@Failure		404			{object}	localization.StandardResponse						"Salary not found"
+//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/salary/{salary_id} [get]
+//
 // GetSalaryByID implements [port.SalaryHandler].
 func (u *salaryHandler) GetSalaryByID(ctx *fiber.Ctx) {
 	salaryID := ctx.Params("salary_id")
@@ -73,6 +120,23 @@ func (u *salaryHandler) GetSalaryByID(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessSalaryCreated.Code, salary)
 }
 
+// GetSalaryByUserID retrieves all salaries submitted by a specific user
+//
+//	@Summary		Get Salaries by User ID
+//	@Description	Retrieves all salary entries submitted by a specific user with pagination
+//	@Tags			Salary
+//	@Accept			json
+//	@Produce		json
+//	@Param			user_id	path		string												true	"User ID (UUID)"
+//	@Param			page	query		int													false	"Page number"		default(1)
+//	@Param			limit	query		int													false	"Items per page"	default(10)
+//	@Param			sort	query		string												false	"Sort field"
+//	@Param			order	query		string												false	"Sort order (asc/desc)"
+//	@Success		200		{object}	localization.StandardResponse{data=[]dto.SalaryRes}	"Salaries fetched successfully"
+//	@Failure		400		{object}	localization.StandardResponse						"Missing user_id or invalid filter parameters"
+//	@Failure		500		{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/salary/user/{user_id} [get]
+//
 // GetSalaryByUserID implements [port.SalaryHandler].
 func (u *salaryHandler) GetSalaryByUserID(ctx *fiber.Ctx) {
 	userID := ctx.Params("user_id")
@@ -97,6 +161,21 @@ func (u *salaryHandler) GetSalaryByUserID(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessSalaryCreated.Code, salaries)
 }
 
+// CreateSalary creates a new salary entry
+//
+//	@Summary		Create Salary
+//	@Description	Creates a new salary information entry for a company (requires authentication)
+//	@Tags			Salary
+//	@Accept			json
+//	@Produce		json
+//	@Security		BearerAuth
+//	@Param			salary	body		dto.CreateSalaryReq				true	"Salary details"
+//	@Success		200		{object}	localization.StandardResponse	"Salary created successfully"
+//	@Failure		400		{object}	localization.StandardResponse	"Invalid request body"
+//	@Failure		401		{object}	localization.StandardResponse	"Unauthorized - user not authenticated"
+//	@Failure		500		{object}	localization.StandardResponse	"Internal server error"
+//	@Router			/salary [post]
+//
 // Salary implements port.UserHandler.
 func (u *salaryHandler) CreateSalary(c *fiber.Ctx) {
 	var req dto.CreateSalaryReq

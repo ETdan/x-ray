@@ -5,16 +5,11 @@ import (
 	"github.com/etdan/x-ray/initiator"
 )
 
-// @title Fiber Example API
-// @version 1.0
-// @description This is a sample swagger for Fiber
-// @termsOfService http://swagger.io/terms/
-// @contact.name API Support
-// @contact.email fiber@swagger.io
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8080
-// @BasePath /
+// @title			X-ray API
+// @version		1.0
+// @description	this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.
+// @host			localhost:8080
+// @BasePath		/x_ray
 func main() {
 	initiator.Init()
 }

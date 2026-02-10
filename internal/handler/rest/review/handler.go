@@ -15,6 +15,21 @@ type reviewHandler struct {
 	service service.ReviewService
 }
 
+// CreateReview creates a new company review
+//
+//	@Summary		Create Review
+//	@Description	Creates a new review for a company (requires authentication)
+//	@Tags			Review
+//	@Accept			json
+//	@Produce		json
+//	@Security		BearerAuth
+//	@Param			review	body		dto.CreateReviewReq				true	"Review details"
+//	@Success		200		{object}	localization.StandardResponse	"Review created successfully"
+//	@Failure		400		{object}	localization.StandardResponse	"Invalid request body"
+//	@Failure		401		{object}	localization.StandardResponse	"Unauthorized - user not authenticated"
+//	@Failure		500		{object}	localization.StandardResponse	"Internal server error"
+//	@Router			/review [post]
+//
 // Review implements port.UserHandler.
 func (u *reviewHandler) CreateReview(c *fiber.Ctx) {
 	var req dto.CreateReviewReq
@@ -38,6 +53,20 @@ func (u *reviewHandler) CreateReview(c *fiber.Ctx) {
 	localization.SendSuccessResponse(c, localization.SuccessReviewCreated.Code, nil)
 }
 
+// GetReviewByID retrieves a specific review by ID
+//
+//	@Summary		Get Review by ID
+//	@Description	Retrieves detailed information about a specific review
+//	@Tags			Review
+//	@Accept			json
+//	@Produce		json
+//	@Param			review_id	path		string												true	"Review ID (UUID)"
+//	@Success		200			{object}	localization.StandardResponse{data=dto.ReviewRes}	"Review fetched successfully"
+//	@Failure		400			{object}	localization.StandardResponse						"Missing review_id parameter"
+//	@Failure		404			{object}	localization.StandardResponse						"Review not found"
+//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/review/{review_id} [get]
+//
 // GetReviewByID implements [port.ReviewHandler].
 func (u *reviewHandler) GetReviewByID(ctx *fiber.Ctx) {
 	reviewID := ctx.Params("review_id")
@@ -55,6 +84,22 @@ func (u *reviewHandler) GetReviewByID(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessReviewCreated.Code, review)
 }
 
+// GetReviewsByPagination retrieves reviews with pagination and filtering
+//
+//	@Summary		Get Reviews by Pagination
+//	@Description	Retrieves a paginated list of reviews with optional filters
+//	@Tags			Review
+//	@Accept			json
+//	@Produce		json
+//	@Param			page	query		int													false	"Page number"		default(1)
+//	@Param			limit	query		int													false	"Items per page"	default(10)
+//	@Param			sort	query		string												false	"Sort field"
+//	@Param			order	query		string												false	"Sort order (asc/desc)"
+//	@Success		200		{object}	localization.StandardResponse{data=[]dto.ReviewRes}	"Reviews fetched successfully"
+//	@Failure		400		{object}	localization.StandardResponse						"Invalid filter parameters"
+//	@Failure		500		{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/review [get]
+//
 // GetReviewsByPagination implements [port.ReviewHandler].
 func (u *reviewHandler) GetReviewsByPagination(ctx *fiber.Ctx) {
 	q := ctx.Queries()
@@ -73,6 +118,23 @@ func (u *reviewHandler) GetReviewsByPagination(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessReviewCreated.Code, reviews)
 }
 
+// GetReviewByCompanyID retrieves all reviews for a specific company
+//
+//	@Summary		Get Reviews by Company ID
+//	@Description	Retrieves all reviews for a specific company with pagination
+//	@Tags			Review
+//	@Accept			json
+//	@Produce		json
+//	@Param			company_id	path		string												true	"Company ID (UUID)"
+//	@Param			page		query		int													false	"Page number"		default(1)
+//	@Param			limit		query		int													false	"Items per page"	default(10)
+//	@Param			sort		query		string												false	"Sort field"
+//	@Param			order		query		string												false	"Sort order (asc/desc)"
+//	@Success		200			{object}	localization.StandardResponse{data=[]dto.ReviewRes}	"Reviews fetched successfully"
+//	@Failure		400			{object}	localization.StandardResponse						"Missing company_id or invalid filter parameters"
+//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/review/company/{company_id} [get]
+//
 // GetReviewByCompanyID implements [port.ReviewHandler].
 func (u *reviewHandler) GetReviewByCompanyID(ctx *fiber.Ctx) {
 	companyID := ctx.Params("company_id")
@@ -96,6 +158,23 @@ func (u *reviewHandler) GetReviewByCompanyID(ctx *fiber.Ctx) {
 	localization.SendSuccessResponse(ctx, localization.SuccessReviewCreated.Code, reviews)
 }
 
+// GetReviewByUserID retrieves all reviews created by a specific user
+//
+//	@Summary		Get Reviews by User ID
+//	@Description	Retrieves all reviews created by a specific user with pagination
+//	@Tags			Review
+//	@Accept			json
+//	@Produce		json
+//	@Param			user_id	path		string												true	"User ID (UUID)"
+//	@Param			page	query		int													false	"Page number"		default(1)
+//	@Param			limit	query		int													false	"Items per page"	default(10)
+//	@Param			sort	query		string												false	"Sort field"
+//	@Param			order	query		string												false	"Sort order (asc/desc)"
+//	@Success		200		{object}	localization.StandardResponse{data=[]dto.ReviewRes}	"Reviews fetched successfully"
+//	@Failure		400		{object}	localization.StandardResponse						"Missing user_id or invalid filter parameters"
+//	@Failure		500		{object}	localization.StandardResponse						"Internal server error"
+//	@Router			/review/user/{user_id} [get]
+//
 // GetReviewByUserID implements [port.ReviewHandler].
 func (u *reviewHandler) GetReviewByUserID(ctx *fiber.Ctx) {
 	userID := ctx.Params("user_id")

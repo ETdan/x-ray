@@ -25,7 +25,7 @@ func NewServer(app *fiber.App) server {
 func (s *server) StartServer(port string) {
 	slog.Info("starting server....")
 	go func() {
-		if err := s.app.Listen(fmt.Sprintf(":%s", port)); err != nil {
+		if err := s.app.Listen(fmt.Sprintf("127.0.0.1:%s", port)); err != nil {
 			slog.Error("error server down")
 		}
 		slog.Info("server is up and running")
