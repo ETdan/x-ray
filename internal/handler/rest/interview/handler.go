@@ -64,6 +64,7 @@ func (u *interviewHandler) CreateInterview(c *fiber.Ctx) {
 //	@Summary		Get Interviews by Company ID
 //	@Description	Retrieves all interview experiences for a specific company with pagination
 //	@Tags			Interview
+//	@Security		BearerAuth
 //	@Accept			json
 //	@Produce		json
 //	@Param			company_id	path		string													true	"Company ID (UUID)"
@@ -104,6 +105,7 @@ func (u *interviewHandler) GetInterviewByCompanyID(ctx *fiber.Ctx) {
 //	@Summary		Get Interview by ID
 //	@Description	Retrieves detailed information about a specific interview experience
 //	@Tags			Interview
+//	@Security		BearerAuth
 //	@Accept			json
 //	@Produce		json
 //	@Param			interview_id	path		string												true	"Interview ID (UUID)"
@@ -135,6 +137,7 @@ func (u *interviewHandler) GetInterviewByID(ctx *fiber.Ctx) {
 //	@Summary		Get Interviews by User ID
 //	@Description	Retrieves all interview experiences submitted by a specific user with pagination
 //	@Tags			Interview
+//	@Security		BearerAuth
 //	@Accept			json
 //	@Produce		json
 //	@Param			user_id	path		string													true	"User ID (UUID)"
@@ -175,6 +178,7 @@ func (u *interviewHandler) GetInterviewByUserID(ctx *fiber.Ctx) {
 //	@Summary		Get Interviews by Pagination
 //	@Description	Retrieves a paginated list of interviews with optional filters
 //	@Tags			Interview
+//	@Security		BearerAuth
 //	@Accept			json
 //	@Produce		json
 //	@Param			page	query		int														false	"Page number"		default(1)

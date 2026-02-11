@@ -18,6 +18,7 @@ type UserHandler struct {
 //
 //	@Summary		Get User by Google ID
 //	@Description	Retrieves user information using their Google OAuth ID
+//	@Security		BearerAuth
 //	@Tags			User
 //	@Accept			json
 //	@Produce		json
@@ -50,6 +51,7 @@ func (u *UserHandler) GetUserByGoogleID(ctx *fiber.Ctx) {
 //
 //	@Summary		Get User by ID
 //	@Description	Retrieves user information using their user ID
+//	@Security		BearerAuth
 //	@Tags			User
 //	@Accept			json
 //	@Produce		json
@@ -82,6 +84,7 @@ func (u *UserHandler) GetUserByID(ctx *fiber.Ctx) {
 //
 //	@Summary		Get Users by Pagination
 //	@Description	Retrieves a paginated list of users with optional filters
+//	@Security		BearerAuth
 //	@Tags			User
 //	@Accept			json
 //	@Produce		json

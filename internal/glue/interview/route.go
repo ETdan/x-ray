@@ -15,41 +15,41 @@ func InitInterviewRoute(r fiber.Router, handler port.InterviewHandler, authMiddl
 			Method:  http.MethodPost,
 			Path:    "/interview",
 			Handler: handler.CreateInterview,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/interview",
 			Handler: handler.GetInterviewsByPagination,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/interview/{id}",
 			Handler: handler.GetInterviewByID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/interview/company/{id}",
 			Handler: handler.GetInterviewByCompanyID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/interview/user/{id}",
 			Handler: handler.GetInterviewByUserID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 	}
 	glue.RegisterRoutes(r, routes)

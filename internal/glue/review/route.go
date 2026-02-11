@@ -15,41 +15,41 @@ func InitReviewRoute(r fiber.Router, handler port.ReviewHandler, authMiddleware 
 			Method:  http.MethodPost,
 			Path:    "/review",
 			Handler: handler.CreateReview,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/review",
 			Handler: handler.GetReviewsByPagination,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/review/{id}",
 			Handler: handler.GetReviewByID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/review/company/{id}",
 			Handler: handler.GetReviewByCompanyID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
 			Path:    "/review/user/{id}",
 			Handler: handler.GetReviewByUserID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 	}
 	glue.RegisterRoutes(r, routes)

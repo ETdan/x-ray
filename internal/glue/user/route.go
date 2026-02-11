@@ -15,9 +15,9 @@ func InitUserRoute(r fiber.Router, handler port.UserHandler, authMiddleware midd
 			Method:  http.MethodGet,
 			Path:    "/user/{id}",
 			Handler: handler.GetUserByID,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,

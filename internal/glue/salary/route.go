@@ -15,9 +15,9 @@ func InitSalaryRoute(r fiber.Router, handler port.SalaryHandler, authMiddleware 
 			Method:  http.MethodPost,
 			Path:    "/salary",
 			Handler: handler.CreateSalary,
-			// Middlewares: []fiber.Handler{
-			// 	authMiddleware.Authentication,
-			// },
+			Middlewares: []fiber.Handler{
+				authMiddleware.Authentication,
+			},
 		},
 		{
 			Method:  http.MethodGet,
