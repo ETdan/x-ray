@@ -12,10 +12,16 @@ import (
 	user_route "github.com/etdan/x-ray/internal/glue/user"
 	"github.com/etdan/x-ray/middleware"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func InitRoute(app *fiber.App, handler Handler, cfg config.Config) {
 	router := fiber.New()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+	}))
 	// general middlewares
 	// router.Use(csrf.New())
 	// router.Use(logger.New())
