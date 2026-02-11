@@ -17,8 +17,8 @@ func MapCompanyModelToDTO(comapnies []model.Company) []dto.CompanyRes {
 			Headquarters: company.Headquarters,
 			Description:  company.Description,
 			Logo:         company.Logo,
-			CreatedAt:    company.CreatedAT,
-			UpdatedAt:    company.UpdatedAT,
+			CreatedAt:    company.CreatedAt,
+			UpdatedAt:    company.UpdatedAt,
 		}
 		res = append(res, c)
 	}

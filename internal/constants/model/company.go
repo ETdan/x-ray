@@ -16,7 +16,7 @@ type Company struct {
 	Headquarters string    `json:"headquarters"`
 	Description  string    `json:"description"`
 	Logo         string    `json:"logo"`
-	Album        []string  `json:"album"`
-	CreatedAT    time.Time `json:"created_at"`
-	UpdatedAT    time.Time `json:"updated_at"`
+	Album        []string  `gorm:"type:text[]" json:"album"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }

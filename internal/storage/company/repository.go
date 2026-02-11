@@ -35,7 +35,7 @@ func (c *CompanyRepository) CreateCompany(ctx *fiber.Ctx, company *dto.CreateCom
 		Description:  company.Description,
 		Logo:         company.Logo,
 		Album:        company.Album,
-		CreatedAT:    time.Now(),
+		CreatedAt:    time.Now(),
 	})
 
 	if res.Error != nil {
