@@ -354,6 +354,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Companies by Pagination
       tags:
       - Company
@@ -455,6 +457,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Company by ID
       tags:
       - Company
@@ -504,6 +508,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Interviews by Pagination
       tags:
       - Interview
@@ -577,6 +583,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Interview by ID
       tags:
       - Interview
@@ -632,6 +640,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Interviews by Company ID
       tags:
       - Interview
@@ -687,6 +697,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Interviews by User ID
       tags:
       - Interview
@@ -736,6 +748,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Reviews by Pagination
       tags:
       - Review
@@ -809,6 +823,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Review by ID
       tags:
       - Review
@@ -863,6 +879,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Reviews by Company ID
       tags:
       - Review
@@ -917,6 +935,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Reviews by User ID
       tags:
       - Review
@@ -966,6 +986,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Salaries by Pagination
       tags:
       - Salary
@@ -1001,6 +1023,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
+      - BearerAuth: []
       - BearerAuth: []
       summary: Create Salary
       tags:
@@ -1040,6 +1063,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Salary by ID
       tags:
       - Salary
@@ -1094,6 +1119,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Salaries by Company ID
       tags:
       - Salary
@@ -1149,6 +1176,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Salaries by User ID
       tags:
       - Salary
@@ -1198,6 +1227,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get Users by Pagination
       tags:
       - User
@@ -1236,6 +1267,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get User by ID
       tags:
       - User
@@ -1274,6 +1307,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/localization.StandardResponse'
+      security:
+      - BearerAuth: []
       summary: Get User by Google ID
       tags:
       - User

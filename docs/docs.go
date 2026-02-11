@@ -158,6 +158,11 @@ const docTemplate = `{
         },
         "/company": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a paginated list of companies with optional filters",
                 "consumes": [
                     "application/json"
@@ -331,6 +336,11 @@ const docTemplate = `{
         },
         "/company/detail": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves detailed information about a specific company",
                 "consumes": [
                     "application/json"
@@ -393,6 +403,11 @@ const docTemplate = `{
         },
         "/interview": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a paginated list of interviews with optional filters",
                 "consumes": [
                     "application/json"
@@ -526,6 +541,11 @@ const docTemplate = `{
         },
         "/interview/company/{company_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all interview experiences for a specific company with pagination",
                 "consumes": [
                     "application/json"
@@ -611,6 +631,11 @@ const docTemplate = `{
         },
         "/interview/user/{user_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all interview experiences submitted by a specific user with pagination",
                 "consumes": [
                     "application/json"
@@ -696,6 +721,11 @@ const docTemplate = `{
         },
         "/interview/{interview_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves detailed information about a specific interview experience",
                 "consumes": [
                     "application/json"
@@ -758,6 +788,11 @@ const docTemplate = `{
         },
         "/review": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a paginated list of reviews with optional filters",
                 "consumes": [
                     "application/json"
@@ -891,6 +926,11 @@ const docTemplate = `{
         },
         "/review/company/{company_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all reviews for a specific company with pagination",
                 "consumes": [
                     "application/json"
@@ -976,6 +1016,11 @@ const docTemplate = `{
         },
         "/review/user/{user_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all reviews created by a specific user with pagination",
                 "consumes": [
                     "application/json"
@@ -1061,6 +1106,11 @@ const docTemplate = `{
         },
         "/review/{review_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves detailed information about a specific review",
                 "consumes": [
                     "application/json"
@@ -1123,6 +1173,11 @@ const docTemplate = `{
         },
         "/salary": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a paginated list of salaries with optional filters",
                 "consumes": [
                     "application/json"
@@ -1202,6 +1257,9 @@ const docTemplate = `{
                 "security": [
                     {
                         "BearerAuth": []
+                    },
+                    {
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Creates a new salary information entry for a company (requires authentication)",
@@ -1256,6 +1314,11 @@ const docTemplate = `{
         },
         "/salary/company/{company_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all salary information for a specific company with pagination",
                 "consumes": [
                     "application/json"
@@ -1341,6 +1404,11 @@ const docTemplate = `{
         },
         "/salary/user/{user_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves all salary entries submitted by a specific user with pagination",
                 "consumes": [
                     "application/json"
@@ -1426,6 +1494,11 @@ const docTemplate = `{
         },
         "/salary/{salary_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves detailed information about a specific salary entry",
                 "consumes": [
                     "application/json"
@@ -1488,6 +1561,11 @@ const docTemplate = `{
         },
         "/user": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a paginated list of users with optional filters",
                 "consumes": [
                     "application/json"
@@ -1566,6 +1644,11 @@ const docTemplate = `{
         },
         "/user/google/{google_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves user information using their Google OAuth ID",
                 "consumes": [
                     "application/json"
@@ -1628,6 +1711,11 @@ const docTemplate = `{
         },
         "/user/{user_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves user information using their user ID",
                 "consumes": [
                     "application/json"
