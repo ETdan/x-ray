@@ -2008,7 +2008,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "132.145.204.122",
 	BasePath:         "/x_ray",
 	Schemes:          []string{},
 	Title:            "X-ray API",

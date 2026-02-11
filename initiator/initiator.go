@@ -24,10 +24,10 @@ func Init() {
 	slog.Info("postgres initiated")
 	defer config.ClosePostgres(db)
 	// run migrations
-	// if err := RunMigrations(db); err != nil {
-	// 	slog.Error("failed to migrate database schema: " + err.Error())
-	// 	// return
-	// }
+	if err := RunMigrations(db); err != nil {
+		slog.Error("failed to migrate database schema: " + err.Error())
+		// return
+	}
 	cloudinaryClient := InitiateObjectStorage(cfg)
 	slog.Info("Initiating Persistence Layer")
 	persistence := InitPersistence(db)
