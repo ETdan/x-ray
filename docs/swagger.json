@@ -1,7 +1,6 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
         "title": "X-ray API",
         "contact": {},
         "version": "1.0"
@@ -2085,6 +2084,7 @@
     },
     "securityDefinitions": {
         "BearerToken": {
+            "description": "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
