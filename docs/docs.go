@@ -2090,14 +2090,21 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "BearerToken": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "132.145.204.122",
-	BasePath:         "/x_ray",
+	Host:             "",
+	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "X-ray API",
 	Description:      "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",

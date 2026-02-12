@@ -6,8 +6,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "132.145.204.122",
-    "basePath": "/x_ray",
     "paths": {
         "/auth/callback": {
             "get": {
@@ -2083,6 +2081,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerToken": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }
