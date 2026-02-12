@@ -1,3 +1,4 @@
+basePath: /x_ray
 definitions:
   dto.CompanyRes:
     properties:
@@ -210,8 +211,13 @@ definitions:
       time:
         type: string
     type: object
+host: x-ray-backend.duckdns.org
 info:
   contact: {}
+  description: this Backend is for x-ray, a company review platform. this backend/project
+    was build with the intention to providing transparency to the job seekers, and
+    also to give the company a chance to improve their work environment. this project
+    is still in early stage, so expect some breaking changes in the future.
   title: X-ray API
   version: "1.0"
 paths:
@@ -1308,10 +1314,6 @@ paths:
       - User
 securityDefinitions:
   BearerToken:
-    description: this Backend is for x-ray, a company review platform. this backend/project
-      was build with the intention to providing transparency to the job seekers, and
-      also to give the company a chance to improve their work environment. this project
-      is still in early stage, so expect some breaking changes in the future.
     in: header
     name: Authorization
     type: apiKey

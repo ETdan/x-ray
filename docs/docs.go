@@ -2093,7 +2093,6 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "BearerToken": {
-            "description": "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -2104,11 +2103,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "",
-	BasePath:         "",
+	Host:             "x-ray-backend.duckdns.org",
+	BasePath:         "/x_ray",
 	Schemes:          []string{},
 	Title:            "X-ray API",
-	Description:      "",
+	Description:      "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
