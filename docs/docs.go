@@ -108,7 +108,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Generates a new access token from a valid refresh token",
@@ -160,7 +160,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves a paginated list of companies with optional filters",
@@ -241,7 +241,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Creates a new company with details, logo, and album images (multipart form data)",
@@ -338,7 +338,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves detailed information about a specific company",
@@ -405,7 +405,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves a paginated list of interviews with optional filters",
@@ -486,7 +486,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Creates a new interview experience for a company (requires authentication)",
@@ -543,7 +543,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all interview experiences for a specific company with pagination",
@@ -633,7 +633,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all interview experiences submitted by a specific user with pagination",
@@ -723,7 +723,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves detailed information about a specific interview experience",
@@ -790,7 +790,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves a paginated list of reviews with optional filters",
@@ -871,7 +871,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Creates a new review for a company (requires authentication)",
@@ -928,7 +928,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all reviews for a specific company with pagination",
@@ -1018,7 +1018,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all reviews created by a specific user with pagination",
@@ -1108,7 +1108,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves detailed information about a specific review",
@@ -1175,7 +1175,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves a paginated list of salaries with optional filters",
@@ -1256,10 +1256,10 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     },
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Creates a new salary information entry for a company (requires authentication)",
@@ -1316,7 +1316,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all salary information for a specific company with pagination",
@@ -1406,7 +1406,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves all salary entries submitted by a specific user with pagination",
@@ -1496,7 +1496,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves detailed information about a specific salary entry",
@@ -1563,7 +1563,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves a paginated list of users with optional filters",
@@ -1646,7 +1646,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves user information using their Google OAuth ID",
@@ -1713,7 +1713,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "BearerToken": []
                     }
                 ],
                 "description": "Retrieves user information using their user ID",
@@ -2093,6 +2093,7 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "BearerToken": {
+            "description": "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -2107,7 +2108,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/x_ray",
 	Schemes:          []string{},
 	Title:            "X-ray API",
-	Description:      "this Backend is for x-ray, a company review platform. this backend/project was build with the intention to providing transparency to the job seekers, and also to give the company a chance to improve their work environment. this project is still in early stage, so expect some breaking changes in the future.",
+	Description:      "this Backend is for x-ray, a company review platform...",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

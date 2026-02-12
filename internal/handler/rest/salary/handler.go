@@ -19,7 +19,7 @@ type salaryHandler struct {
 //
 //	@Summary		Get Salaries by Pagination
 //	@Description	Retrieves a paginated list of salaries with optional filters
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Tags			Salary
 //	@Accept			json
 //	@Produce		json
@@ -55,7 +55,7 @@ func (u *salaryHandler) GetSalariesByPagination(ctx *fiber.Ctx) {
 //	@Summary		Get Salaries by Company ID
 //	@Description	Retrieves all salary information for a specific company with pagination
 //	@Tags			Salary
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Accept			json
 //	@Produce		json
 //	@Param			company_id	path		string												true	"Company ID (UUID)"
@@ -95,7 +95,7 @@ func (u *salaryHandler) GetSalaryByCompanyID(ctx *fiber.Ctx) {
 //
 //	@Summary		Get Salary by ID
 //	@Description	Retrieves detailed information about a specific salary entry
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Tags			Salary
 //	@Accept			json
 //	@Produce		json
@@ -127,7 +127,7 @@ func (u *salaryHandler) GetSalaryByID(ctx *fiber.Ctx) {
 //
 //	@Summary		Get Salaries by User ID
 //	@Description	Retrieves all salary entries submitted by a specific user with pagination
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Tags			Salary
 //	@Accept			json
 //	@Produce		json
@@ -169,11 +169,11 @@ func (u *salaryHandler) GetSalaryByUserID(ctx *fiber.Ctx) {
 //
 //	@Summary		Create Salary
 //	@Description	Creates a new salary information entry for a company (requires authentication)
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Tags			Salary
 //	@Accept			json
 //	@Produce		json
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Param			salary	body		dto.CreateSalaryReq				true	"Salary details"
 //	@Success		200		{object}	localization.StandardResponse	"Salary created successfully"
 //	@Failure		400		{object}	localization.StandardResponse	"Invalid request body"

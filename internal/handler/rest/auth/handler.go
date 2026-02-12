@@ -42,21 +42,17 @@ type AuthHandler struct {
 	cfg     config.Config
 }
 
-// Callback handles the OAuth callback from Google
-//
-//	@Summary		Google OAuth Callback
-//	@Description	Handles the OAuth callback from Google, exchanges authorization code for tokens, and creates/authenticates user
-//	@Tags			Auth
-//	@Accept			json
-//	@Produce		json
-//	@Param			code	query		string							true	"Authorization code from Google"
-//	@Param			state	query		string							true	"State parameter for CSRF protection"
-//	@Success		200		{object}	localization.StandardResponse{data=dto.UserRes}	"Successful login with user data"
-//	@Failure		400		{object}	localization.StandardResponse		"Invalid callback parameters or state mismatch"
-//	@Failure		500		{object}	localization.StandardResponse		"Internal server error during OAuth process"
-//	@Router			/auth/callback [get]
-//
-// Callback implements port.OauthHandler.
+// @Summary		Google OAuth Callback
+// @Description	Handles the OAuth callback from Google, exchanges authorization code for tokens, and creates/authenticates user
+// @Tags			Auth
+// @Accept			json
+// @Produce		json
+// @Param			code	query		string							true	"Authorization code from Google"
+// @Param			state	query		string							true	"State parameter for CSRF protection"
+// @Success		200		{object}	localization.StandardResponse{data=dto.UserRes}	"Successful login with user data"
+// @Failure		400		{object}	localization.StandardResponse		"Invalid callback parameters or state mismatch"
+// @Failure		500		{object}	localization.StandardResponse		"Internal server error during OAuth process"
+// @Router			/auth/callback [get]
 func (a AuthHandler) Callback(c *fiber.Ctx) {
 	queries := c.Queries()
 	code := queries["code"]
@@ -133,17 +129,13 @@ func (a AuthHandler) Callback(c *fiber.Ctx) {
 	localization.SendSuccessResponse(c, localization.SuccessfulLogin.Code, response)
 }
 
-// Login initiates the Google OAuth flow
-//
-//	@Summary		Initiate Google OAuth Login
-//	@Description	Redirects user to Google OAuth consent screen
-//	@Tags			Auth
-//	@Produce		json
-//	@Success		302	{string}	string						"Redirect to Google OAuth"
-//	@Failure		500	{object}	localization.StandardResponse	"Missing environment variables"
-//	@Router			/auth/login [get]
-//
-// Login implements port.OauthHandler.
+// @Summary		Initiate Google OAuth Login
+// @Description	Redirects user to Google OAuth consent screen
+// @Tags			Auth
+// @Produce		json
+// @Success		302	{string}	string						"Redirect to Google OAuth"
+// @Failure		500	{object}	localization.StandardResponse	"Missing environment variables"
+// @Router			/auth/login [get]
 func (a AuthHandler) Login(c *fiber.Ctx) {
 	if a.cfg.ClientID == "" || a.cfg.RedirectURL == "" {
 		slog.Info(a.cfg.ClientID, a.cfg.RedirectURL, "env values should be printed here")
@@ -162,20 +154,16 @@ func (a AuthHandler) Login(c *fiber.Ctx) {
 	c.Redirect(redirectUrl)
 }
 
-// RefreshToken generates a new access token using refresh token
-//
-//	@Summary		Refresh Access Token
-//	@Description	Generates a new access token from a valid refresh token
-//	@Tags			Auth
-//	@Accept			json
-//	@Produce		json
-//	@Security		BearerAuth
-//	@Success		200	{object}	localization.StandardResponse{data=string}	"New access token generated"
-//	@Failure		401	{object}	localization.StandardResponse					"Unauthorized - invalid or missing refresh token"
-//	@Failure		500	{object}	localization.StandardResponse					"Internal server error"
-//	@Router			/auth/refresh [post]
-//
-// AccessToken implements port.OauthHandler.
+// @Summary		Refresh Access Token
+// @Description	Generates a new access token from a valid refresh token
+// @Tags			Auth
+// @Accept			json
+// @Produce		json
+// @Security BearerToken
+// @Success		200	{object}	localization.StandardResponse{data=string}	"New access token generated"
+// @Failure		401	{object}	localization.StandardResponse					"Unauthorized - invalid or missing refresh token"
+// @Failure		500	{object}	localization.StandardResponse					"Internal server error"
+// @Router			/auth/refresh [post]
 func (a AuthHandler) RefreshToken(c *fiber.Ctx) {
 	userID := c.Locals("user_id").(string)
 	if userID == "" {

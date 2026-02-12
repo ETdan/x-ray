@@ -22,7 +22,7 @@ type reviewHandler struct {
 //	@Tags			Review
 //	@Accept			json
 //	@Produce		json
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Param			review	body		dto.CreateReviewReq				true	"Review details"
 //	@Success		200		{object}	localization.StandardResponse	"Review created successfully"
 //	@Failure		400		{object}	localization.StandardResponse	"Invalid request body"
@@ -58,7 +58,7 @@ func (u *reviewHandler) CreateReview(c *fiber.Ctx) {
 //	@Summary		Get Review by ID
 //	@Description	Retrieves detailed information about a specific review
 //	@Tags			Review
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Accept			json
 //	@Produce		json
 //	@Param			review_id	path		string												true	"Review ID (UUID)"
@@ -90,7 +90,7 @@ func (u *reviewHandler) GetReviewByID(ctx *fiber.Ctx) {
 //	@Summary		Get Reviews by Pagination
 //	@Description	Retrieves a paginated list of reviews with optional filters
 //	@Tags			Review
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Accept			json
 //	@Produce		json
 //	@Param			page	query		int													false	"Page number"		default(1)
@@ -125,7 +125,7 @@ func (u *reviewHandler) GetReviewsByPagination(ctx *fiber.Ctx) {
 //	@Summary		Get Reviews by Company ID
 //	@Description	Retrieves all reviews for a specific company with pagination
 //	@Tags			Review
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Accept			json
 //	@Produce		json
 //	@Param			company_id	path		string												true	"Company ID (UUID)"
@@ -166,7 +166,7 @@ func (u *reviewHandler) GetReviewByCompanyID(ctx *fiber.Ctx) {
 //	@Summary		Get Reviews by User ID
 //	@Description	Retrieves all reviews created by a specific user with pagination
 //	@Tags			Review
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Accept			json
 //	@Produce		json
 //	@Param			user_id	path		string												true	"User ID (UUID)"

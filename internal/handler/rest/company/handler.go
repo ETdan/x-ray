@@ -22,7 +22,7 @@ type companyHandler struct {
 //	@Tags			Company
 //	@Accept			multipart/form-data
 //	@Produce		json
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Param			name			formData	string							true	"Company name"
 //	@Param			website			formData	string							false	"Company website URL"
 //	@Param			industry		formData	string							false	"Industry type"
@@ -82,7 +82,7 @@ func (c *companyHandler) CreateCompany(ctx *fiber.Ctx) {
 //	@Tags			Company
 //	@Accept			json
 //	@Produce		json
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Param			page	query		int														false	"Page number"		default(1)
 //	@Param			limit	query		int														false	"Items per page"	default(10)
 //	@Param			sort	query		string													false	"Sort field"
@@ -119,7 +119,7 @@ func (c *companyHandler) GetCompaniesByPagination(ctx *fiber.Ctx) {
 //	@Tags			Company
 //	@Accept			json
 //	@Produce		json
-//	@Security		BearerAuth
+//	@Security BearerToken
 //	@Param			company_id	query		string												true	"Company ID (UUID)"
 //	@Success		200			{object}	localization.StandardResponse{data=dto.CompanyRes}	"Company fetched successfully"
 //	@Failure		400			{object}	localization.StandardResponse						"Missing company_id parameter"

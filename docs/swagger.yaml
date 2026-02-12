@@ -214,10 +214,7 @@ definitions:
 host: x-ray-backend.duckdns.org
 info:
   contact: {}
-  description: this Backend is for x-ray, a company review platform. this backend/project
-    was build with the intention to providing transparency to the job seekers, and
-    also to give the company a chance to improve their work environment. this project
-    is still in early stage, so expect some breaking changes in the future.
+  description: this Backend is for x-ray, a company review platform...
   title: X-ray API
   version: "1.0"
 paths:
@@ -304,7 +301,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Refresh Access Token
       tags:
       - Auth
@@ -355,7 +352,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Companies by Pagination
       tags:
       - Company
@@ -418,7 +415,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Create Company
       tags:
       - Company
@@ -458,7 +455,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Company by ID
       tags:
       - Company
@@ -509,7 +506,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Interviews by Pagination
       tags:
       - Interview
@@ -544,7 +541,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Create Interview
       tags:
       - Interview
@@ -584,7 +581,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Interview by ID
       tags:
       - Interview
@@ -641,7 +638,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Interviews by Company ID
       tags:
       - Interview
@@ -698,7 +695,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Interviews by User ID
       tags:
       - Interview
@@ -749,7 +746,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Reviews by Pagination
       tags:
       - Review
@@ -784,7 +781,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Create Review
       tags:
       - Review
@@ -824,7 +821,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Review by ID
       tags:
       - Review
@@ -880,7 +877,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Reviews by Company ID
       tags:
       - Review
@@ -936,7 +933,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Reviews by User ID
       tags:
       - Review
@@ -987,7 +984,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Salaries by Pagination
       tags:
       - Salary
@@ -1023,8 +1020,8 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
-      - BearerAuth: []
+      - BearerToken: []
+      - BearerToken: []
       summary: Create Salary
       tags:
       - Salary
@@ -1064,7 +1061,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Salary by ID
       tags:
       - Salary
@@ -1120,7 +1117,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Salaries by Company ID
       tags:
       - Salary
@@ -1177,7 +1174,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Salaries by User ID
       tags:
       - Salary
@@ -1228,7 +1225,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get Users by Pagination
       tags:
       - User
@@ -1268,7 +1265,7 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get User by ID
       tags:
       - User
@@ -1308,12 +1305,16 @@ paths:
           schema:
             $ref: '#/definitions/localization.StandardResponse'
       security:
-      - BearerAuth: []
+      - BearerToken: []
       summary: Get User by Google ID
       tags:
       - User
 securityDefinitions:
   BearerToken:
+    description: this Backend is for x-ray, a company review platform. this backend/project
+      was build with the intention to providing transparency to the job seekers, and
+      also to give the company a chance to improve their work environment. this project
+      is still in early stage, so expect some breaking changes in the future.
     in: header
     name: Authorization
     type: apiKey
