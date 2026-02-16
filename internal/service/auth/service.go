@@ -60,7 +60,7 @@ func (a AuthService) Create(gc dto.GoogleIDTokenClaims) (dto.LoginResponse, erro
 		}
 	}
 
-	accessToken, err := core.GenerateAccessToken(gc.Subject, a.cfg.JWTSecret, a.cfg.JWTExpireDuration)
+	accessToken, err := core.GenerateAccessToken(user_id.String(), a.cfg.JWTSecret, a.cfg.JWTExpireDuration)
 	if err != nil {
 		slog.Info("error while generating access accessToken", err)
 		return dto.LoginResponse{}, errors.New(localization.ErrorGeneratingAccessToken.Code)

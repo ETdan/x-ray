@@ -128,7 +128,7 @@ func (c *CompanyRepository) GetCompanyByID(ctx *fiber.Ctx, companyID string) (mo
 func (c *CompanyRepository) GetCompanyByName(ctx *fiber.Ctx, name string) (model.Company, error) {
 	slog.Info("get company by name repository", "name", name)
 	var company model.Company
-	res := c.db.Where("name ?", name).First(&company)
+	res := c.db.Where("name = ?", name).First(&company)
 	if res.Error != nil {
 		slog.Error("Failed to fetch company by name", slog.String("name", name), slog.Any("error", res.Error))
 		return model.Company{}, errors.New(localization.ErrorCompanyNotFound.Code)

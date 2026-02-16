@@ -25,7 +25,7 @@ type CompanyService struct {
 // CreateCompany implements [service.CompanyService].
 func (c *CompanyService) CreateCompany(ctx *fiber.Ctx, req *dto.CreateCompanyReq) error {
 	slog.Info("create company service", "req:", req)
-	if company, err := c.companyRepo.GetCompanyByName(ctx, req.Name); err != nil && err.Error() != localization.ErrorCompanyNotFound.Message {
+	if company, err := c.companyRepo.GetCompanyByName(ctx, req.Name); err != nil && err.Error() != localization.ErrorCompanyNotFound.Code {
 		return errors.New(localization.ErrorInternalServerError.Code)
 	} else if company.ID != uuid.Nil {
 		return errors.New(localization.ErrorCompanyAlreadyExists.Message)
