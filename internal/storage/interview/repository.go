@@ -18,6 +18,7 @@ type InterviewRepository struct {
 
 // CreateInterview implements [storage.InterviewRepository].
 func (i *InterviewRepository) CreateInterview(ctx *fiber.Ctx, interview *dto.CreateInterviewReq) error {
+	slog.Info("create interview repository", "interview:", interview)
 	id := uuid.New()
 	companyID, err := uuid.Parse(interview.CompanyID)
 	if err != nil {
@@ -52,6 +53,7 @@ func (i *InterviewRepository) CreateInterview(ctx *fiber.Ctx, interview *dto.Cre
 
 // FindByPagination implements [storage.InterviewRepository].
 func (i *InterviewRepository) FindByPagination(ctx *fiber.Ctx, companyID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Interview], error) {
+	slog.Info("find interviews by pagination repository", "companyID:", companyID, "filter:", filter)
 	var total int64
 	var interviews []model.Interview
 
@@ -102,6 +104,7 @@ func (i *InterviewRepository) FindByPagination(ctx *fiber.Ctx, companyID string,
 
 // GetInterviewByCompanyID implements [storage.InterviewRepository].
 func (i *InterviewRepository) GetInterviewByCompanyID(ctx *fiber.Ctx, companyID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Interview], error) {
+	slog.Info("get interview by company id repository", "companyID:", companyID, "filter:", filter)
 	var total int64
 	companyUUID, err := uuid.Parse(companyID)
 	if err != nil {
@@ -151,6 +154,7 @@ func (i *InterviewRepository) GetInterviewByCompanyID(ctx *fiber.Ctx, companyID 
 
 // GetInterviewByID implements [storage.InterviewRepository].
 func (i *InterviewRepository) GetInterviewByID(ctx *fiber.Ctx, interviewID string) (model.Interview, error) {
+	slog.Info("get interview by id repository", "id:", interviewID)
 	interviewUUID, err := uuid.Parse(interviewID)
 	if err != nil {
 		slog.Error("Invalid interview id", slog.String("interview_id", interviewID), slog.Any("error", err))
@@ -168,6 +172,7 @@ func (i *InterviewRepository) GetInterviewByID(ctx *fiber.Ctx, interviewID strin
 
 // GetInterviewByUserID implements [storage.InterviewRepository].
 func (i *InterviewRepository) GetInterviewByUserID(ctx *fiber.Ctx, userID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Interview], error) {
+	slog.Info("get interview by user id repository", "userID:", userID, "filter:", filter)
 	var total int64
 	userUUID, err := uuid.Parse(userID)
 	if err != nil {
@@ -214,6 +219,7 @@ func (i *InterviewRepository) GetInterviewByUserID(ctx *fiber.Ctx, userID string
 
 // GetInterviewsByPagination implements [storage.InterviewRepository].
 func (i *InterviewRepository) GetInterviewsByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.Interview], error) {
+	slog.Info("get interviews by pagination repository", "filter:", filter)
 	var total int64
 	var interviews []model.Interview
 	countRes := i.db.Model(&model.Interview{}).Where(

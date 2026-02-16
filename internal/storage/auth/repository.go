@@ -17,6 +17,7 @@ type AuthRepository struct {
 
 // CreateUser implements storage.UserRepository.
 func (a AuthRepository) CreateUser(gc dto.GoogleIDTokenClaims) (uuid.UUID, error) {
+	slog.Info("create user repository", "google claim:", gc)
 	uuid := uuid.New()
 	tx := a.db.Create(model.User{
 		ID:        uuid,
@@ -35,6 +36,7 @@ func (a AuthRepository) CreateUser(gc dto.GoogleIDTokenClaims) (uuid.UUID, error
 
 // FindUserBySub implements storage.UserRepository.
 func (a AuthRepository) FindUserBySub(sub string) (model.User, error) {
+	slog.Info("user lookup repository by google sub:", sub)
 	var user model.User
 	err := a.db.Where(model.User{GoogleID: sub}).First(&user).Error
 	if err != nil {

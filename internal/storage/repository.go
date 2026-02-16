@@ -16,7 +16,6 @@ type UserRepository interface {
 	FindUserByUserID(ctx *fiber.Ctx, userID string) (model.User, error)
 	FindUserByGoogleID(ctx *fiber.Ctx, googleID string) (model.User, error)
 	GetUsersByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.User], error)
-	FindUserBySub(ctx *fiber.Ctx, sub string) (model.User, error)
 	CreateUser(ctx *fiber.Ctx, gc dto.GoogleIDTokenClaims) error
 }
 type RefreshTokenRepository interface {

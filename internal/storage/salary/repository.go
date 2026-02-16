@@ -18,6 +18,7 @@ type SalaryRepository struct {
 
 // CreateSalary implements [storage.SalaryRepository].
 func (s *SalaryRepository) CreateSalary(ctx *fiber.Ctx, salary *dto.CreateSalaryReq) error {
+	slog.Info("create salary repository", "salary:", salary)
 	id := uuid.New()
 
 	userID, err := uuid.Parse(salary.UserID)
@@ -54,6 +55,7 @@ func (s *SalaryRepository) CreateSalary(ctx *fiber.Ctx, salary *dto.CreateSalary
 
 // FindByPagination implements [storage.SalaryRepository].
 func (s *SalaryRepository) FindByPagination(ctx *fiber.Ctx, companyID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Salary], error) {
+	slog.Info("find salaries by pagination repository", "companyID:", companyID, "filter:", filter)
 	var total int64
 	var salaries []model.Salary
 	countRes := s.db.Model(&model.Salary{}).Where(
@@ -105,6 +107,7 @@ func (s *SalaryRepository) FindByPagination(ctx *fiber.Ctx, companyID string, fi
 
 // GetSalariesByPagination implements [storage.SalaryRepository].
 func (s *SalaryRepository) GetSalariesByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.Salary], error) {
+	slog.Info("get salaries by pagination repository", "filter:", filter)
 	var total int64
 	var salaries []model.Salary
 	countRes := s.db.Model(&model.Salary{}).Where(
@@ -156,6 +159,7 @@ func (s *SalaryRepository) GetSalariesByPagination(ctx *fiber.Ctx, filter dto.Fi
 
 // GetSalaryByCompanyID implements [storage.SalaryRepository].
 func (s *SalaryRepository) GetSalaryByCompanyID(ctx *fiber.Ctx, companyID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Salary], error) {
+	slog.Info("get salaries by company ID repository", "companyID:", companyID, "filter:", filter)
 	var total int64
 	var salaries []model.Salary
 	countRes := s.db.Model(&model.Salary{}).Where("company_id = ?", companyID).Count(&total)
@@ -202,6 +206,7 @@ func (s *SalaryRepository) GetSalaryByCompanyID(ctx *fiber.Ctx, companyID string
 
 // GetSalaryByID implements [storage.SalaryRepository].
 func (s *SalaryRepository) GetSalaryByID(ctx *fiber.Ctx, salaryID string) (model.Salary, error) {
+	slog.Info("get salary by id repository", "id:", salaryID)
 	var salary model.Salary
 	salaryUUID, err := uuid.Parse(salaryID)
 	if err != nil {
@@ -219,6 +224,7 @@ func (s *SalaryRepository) GetSalaryByID(ctx *fiber.Ctx, salaryID string) (model
 
 // GetSalaryByUserID implements [storage.SalaryRepository].
 func (s *SalaryRepository) GetSalaryByUserID(ctx *fiber.Ctx, userID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Salary], error) {
+	slog.Info("get salaries by user ID repository", "userID:", userID, "filter:", filter)
 	var total int64
 	var salaries []model.Salary
 	userUUID, err := uuid.Parse(userID)

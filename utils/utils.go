@@ -112,7 +112,7 @@ func BuildFilter(filter map[string]string) (dto.Filter, error) {
 }
 
 func UploadFilesToCloudinary(ctx *fiber.Ctx, cloudinaryClient *cloudinary.Cloudinary, files []*multipart.FileHeader, folderName string) ([]string, error) {
-
+	slog.Info("upload files to cloudinary", "folder name:", folderName)
 	var fileURLs []string
 
 	for _, fileHeader := range files {

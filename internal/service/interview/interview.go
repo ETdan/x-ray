@@ -2,6 +2,7 @@ package interview_service
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/etdan/x-ray/internal/constants/dto"
 	"github.com/etdan/x-ray/internal/constants/localization"
@@ -19,6 +20,7 @@ type InterviewService struct {
 
 // CreateInterview implements [service.InterviewService].
 func (i *InterviewService) CreateInterview(ctx *fiber.Ctx, req *dto.CreateInterviewReq) error {
+	slog.Info("create interview service", "req:", req)
 	userID := ctx.Locals("user_id")
 	userIDStr, _ := userID.(string)
 

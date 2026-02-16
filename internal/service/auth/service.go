@@ -21,6 +21,8 @@ type AuthService struct {
 
 // CreateAccessToken implements service.OauthService.
 func (a AuthService) CreateAccessToken(userID, hash string) (string, error) {
+	slog.Info("create access token service", "userID:", userID, "hash", hash)
+
 	if _, err := a.tokenRepo.GetRefreshTokenByUserIDAndHash(userID, hash); err != nil {
 		slog.Info("Existing refresh token not found for user", "userID:", userID, " hash:", hash)
 		return "", errors.New(localization.ErrorRefreshTokenNotFound.Code)
@@ -37,6 +39,7 @@ func (a AuthService) CreateAccessToken(userID, hash string) (string, error) {
 
 // Create implements service.UserService.
 func (a AuthService) Create(gc dto.GoogleIDTokenClaims) (dto.LoginResponse, error) {
+	slog.Info("create user service", "claims:", gc)
 	existingUser, err := a.repo.FindUserBySub(gc.Subject)
 	if err != nil {
 		if err.Error() != localization.ErrorRecordNotFound.Message {

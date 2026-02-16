@@ -10,6 +10,7 @@ import (
 )
 
 func GenerateAccessToken(user_id, secret, expire_duration string) (string, error) {
+	slog.Info("generate access token helper", "userid", user_id)
 	duration, err := time.ParseDuration(expire_duration)
 	if err != nil {
 		return "", err
@@ -38,6 +39,7 @@ func GenerateAccessToken(user_id, secret, expire_duration string) (string, error
 }
 
 func GenerateRefreshToken(user_id, secret, expire_duration string) (string, string) {
+	slog.Info("generate refresh token helper", "userid", user_id)
 	// Generate a SHA256 hash from sub and current time
 	duration, err := time.ParseDuration(expire_duration)
 	if err != nil {

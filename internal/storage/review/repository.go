@@ -18,6 +18,7 @@ type ReviewRepository struct {
 
 // CreateReview implements [storage.ReviewRepository].
 func (r *ReviewRepository) CreateReview(ctx *fiber.Ctx, review *dto.CreateReviewReq) error {
+	slog.Info("create review repository", "review:", review)
 	id := uuid.New()
 
 	userID, err := uuid.Parse(review.UserID)
@@ -55,6 +56,7 @@ func (r *ReviewRepository) CreateReview(ctx *fiber.Ctx, review *dto.CreateReview
 
 // FindByPagination implements [storage.ReviewRepository].
 func (r *ReviewRepository) FindByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.Review], error) {
+	slog.Info("find reviews by pagination repository", "filter:", filter)
 	var total int64
 	var reviews []model.Review
 	countRes := r.db.Model(&model.Review{}).Where(
@@ -105,6 +107,7 @@ func (r *ReviewRepository) FindByPagination(ctx *fiber.Ctx, filter dto.Filter) (
 
 // GetReviewByCompanyID implements [storage.ReviewRepository].
 func (r *ReviewRepository) GetReviewByCompanyID(ctx *fiber.Ctx, companyID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Review], error) {
+	slog.Info("get reviews by company ID repository", "companyID:", companyID, "filter:", filter)
 	var total int64
 	var reviews []model.Review
 	countRes := r.db.Model(&model.Review{}).Where("company_id = ?", companyID).Count(&total)
@@ -151,6 +154,7 @@ func (r *ReviewRepository) GetReviewByCompanyID(ctx *fiber.Ctx, companyID string
 
 // GetReviewByID implements [storage.ReviewRepository].
 func (r *ReviewRepository) GetReviewByID(ctx *fiber.Ctx, reviewID string) (model.Review, error) {
+	slog.Info("get review by id repository", "id:", reviewID)
 	var review model.Review
 	reviewUUID, err := uuid.Parse(reviewID)
 	if err != nil {
@@ -168,6 +172,7 @@ func (r *ReviewRepository) GetReviewByID(ctx *fiber.Ctx, reviewID string) (model
 
 // GetReviewByUserID implements [storage.ReviewRepository].
 func (r *ReviewRepository) GetReviewByUserID(ctx *fiber.Ctx, userID string, filter dto.Filter) (dto.PaginatedResponse[[]model.Review], error) {
+	slog.Info("get reviews by user ID repository", "userID:", userID, "filter:", filter)
 	var total int64
 	var reviews []model.Review
 	userUUID, err := uuid.Parse(userID)
