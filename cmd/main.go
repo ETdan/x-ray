@@ -9,6 +9,7 @@ import (
 // @version          1.0
 // @description      this Backend is for x-ray, a company review platform...
 // @host             x-ray-backend.duckdns.org
+// @host             localhost:8080
 // @basePath         /x_ray
 // @securityDefinitions.apikey BearerToken
 // @type 			 apiKey
