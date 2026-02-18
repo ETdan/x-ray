@@ -14,6 +14,10 @@ import (
 type companyHandler struct {
 	service service.CompanyService
 }
+type CompanyListResponse struct {
+	Data []dto.CompanyRes `json:"data"`
+	Meta dto.MetaData     `json:"meta"`
+}
 
 // CreateCompany creates a new company with logo and album images
 //
@@ -87,7 +91,7 @@ func (c *companyHandler) CreateCompany(ctx *fiber.Ctx) {
 //	@Param			limit	query		int														false	"Items per page"	default(10)
 //	@Param			sort	query		string													false	"Sort field"
 //	@Param			order	query		string													false	"Sort order (asc/desc)"
-//	@Success		200		{object}	localization.StandardResponse{data=[]dto.CompanyRes}	"Companies fetched successfully"
+//	@Success		200		{object}	localization.StandardResponse{data=CompanyListResponse}	"Companies fetched successfully"
 //	@Failure		400		{object}	localization.StandardResponse							"Invalid filter parameters"
 //	@Failure		500		{object}	localization.StandardResponse							"Internal server error"
 //	@Router			/company [get]
@@ -109,7 +113,10 @@ func (c *companyHandler) GetCompaniesByPagination(ctx *fiber.Ctx) {
 		localization.SendErrorResponse(ctx, err.Error())
 		return
 	}
-	localization.SendSuccessResponse(ctx, localization.SuccessCompaniesFetched.Code, companies)
+	localization.SendSuccessResponse(ctx, localization.SuccessCompaniesFetched.Code, CompanyListResponse{
+		Data: companies.Data,
+		Meta: companies.Meta,
+	})
 }
 
 // GetCompanyByID retrieves a specific company by ID

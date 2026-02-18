@@ -214,10 +214,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/dto.CompanyRes"
-                                            }
+                                            "$ref": "#/definitions/company_handler.CompanyListResponse"
                                         }
                                     }
                                 }
@@ -1778,6 +1775,20 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "company_handler.CompanyListResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.CompanyRes"
+                    }
+                },
+                "meta": {
+                    "$ref": "#/definitions/dto.MetaData"
+                }
+            }
+        },
         "dto.CompanyRes": {
             "type": "object",
             "properties": {
@@ -1966,6 +1977,23 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.MetaData": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "per_page": {
+                    "type": "integer"
+                },
+                "total_count": {
+                    "type": "integer"
+                },
+                "total_page": {
+                    "type": "integer"
+                }
+            }
+        },
         "dto.ReviewRes": {
             "type": "object",
             "properties": {
@@ -2104,7 +2132,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "x-ray-backend.duckdns.org",
+	Host:             "localhost:8080",
 	BasePath:         "/x_ray",
 	Schemes:          []string{},
 	Title:            "X-ray API",

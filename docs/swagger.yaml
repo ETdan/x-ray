@@ -1,5 +1,14 @@
 basePath: /x_ray
 definitions:
+  company_handler.CompanyListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.CompanyRes'
+        type: array
+      meta:
+        $ref: '#/definitions/dto.MetaData'
+    type: object
   dto.CompanyRes:
     properties:
       album:
@@ -128,6 +137,17 @@ definitions:
       job_title:
         type: string
     type: object
+  dto.MetaData:
+    properties:
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total_count:
+        type: integer
+      total_page:
+        type: integer
+    type: object
   dto.ReviewRes:
     properties:
       benefit:
@@ -211,7 +231,7 @@ definitions:
       time:
         type: string
     type: object
-host: x-ray-backend.duckdns.org
+host: localhost:8080
 info:
   contact: {}
   description: this Backend is for x-ray, a company review platform...
@@ -339,9 +359,7 @@ paths:
             - $ref: '#/definitions/localization.StandardResponse'
             - properties:
                 data:
-                  items:
-                    $ref: '#/definitions/dto.CompanyRes'
-                  type: array
+                  $ref: '#/definitions/company_handler.CompanyListResponse'
               type: object
         "400":
           description: Invalid filter parameters

@@ -7,7 +7,7 @@ import (
 
 func MapCompanyModelToDTO(comapnies []model.Company) []dto.CompanyRes {
 	res := make([]dto.CompanyRes, len(comapnies))
-	for _, company := range comapnies {
+	for i, company := range comapnies {
 		c := dto.CompanyRes{
 			ID:           company.ID,
 			Name:         company.Name,
@@ -20,7 +20,7 @@ func MapCompanyModelToDTO(comapnies []model.Company) []dto.CompanyRes {
 			CreatedAt:    company.CreatedAt,
 			UpdatedAt:    company.UpdatedAt,
 		}
-		res = append(res, c)
+		res[i] = c
 	}
 	return res
 }

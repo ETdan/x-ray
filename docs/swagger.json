@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "x-ray-backend.duckdns.org",
+    "host": "localhost:8080",
     "basePath": "/x_ray",
     "paths": {
         "/auth/callback": {
@@ -208,10 +208,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/dto.CompanyRes"
-                                            }
+                                            "$ref": "#/definitions/company_handler.CompanyListResponse"
                                         }
                                     }
                                 }
@@ -1772,6 +1769,20 @@
         }
     },
     "definitions": {
+        "company_handler.CompanyListResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.CompanyRes"
+                    }
+                },
+                "meta": {
+                    "$ref": "#/definitions/dto.MetaData"
+                }
+            }
+        },
         "dto.CompanyRes": {
             "type": "object",
             "properties": {
@@ -1957,6 +1968,23 @@
                 },
                 "job_title": {
                     "type": "string"
+                }
+            }
+        },
+        "dto.MetaData": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "per_page": {
+                    "type": "integer"
+                },
+                "total_count": {
+                    "type": "integer"
+                },
+                "total_page": {
+                    "type": "integer"
                 }
             }
         },
