@@ -231,7 +231,7 @@ definitions:
       time:
         type: string
     type: object
-host: localhost:8080
+host: x-ray-backend.duckdns.org
 info:
   contact: {}
   description: this Backend is for x-ray, a company review platform...
