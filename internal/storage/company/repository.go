@@ -68,25 +68,19 @@ func (c *CompanyRepository) FindByPagination(ctx *fiber.Ctx, filter dto.Filter) 
 
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
 
-	if (filter.Page-1)*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.Company]{
-			Data: []model.Company{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
 
 	}
 
 	offset := int((filter.Page - 1) * filter.Per_page)
 
-	res := c.db.Where(
-		"name ILIKE ? OR industry ILIKE ? OR headquarters ILIKE ?",
-		"%"+filter.Search+"%", "%"+filter.Search+"%", "%"+filter.Search+"%",
-	).Limit(int(filter.Per_page)).Offset(offset).Find(&companies)
+	res := c.db.Find(&companies).Limit(int(filter.Per_page)).Offset(offset)
+	// .Find(&companies)
+	// "name ILIKE ? OR industry ILIKE ? OR headquarters ILIKE ?",
+	// "%"+filter.Search+"%", "%"+filter.Search+"%", "%"+filter.Search+"%",
 
 	if res.Error != nil {
 		slog.Error("Failed to fetch companies", slog.Any("error", res.Error), slog.String("search", filter.Search))
@@ -125,16 +119,50 @@ func (c *CompanyRepository) GetCompanyByID(ctx *fiber.Ctx, companyID string) (mo
 }
 
 // GetCompanyByName implements [storage.CompanyRepository].
-func (c *CompanyRepository) GetCompanyByName(ctx *fiber.Ctx, name string) (model.Company, error) {
+func (c *CompanyRepository) GetCompanyByName(ctx *fiber.Ctx, name string, filter dto.Filter) (dto.PaginatedResponse[[]model.Company], error) {
 	slog.Info("get company by name repository", "name", name)
-	var company model.Company
-	res := c.db.Where("name = ?", name).First(&company)
-	if res.Error != nil {
-		slog.Error("Failed to fetch company by name", slog.String("name", name), slog.Any("error", res.Error))
-		return model.Company{}, errors.New(localization.ErrorCompanyNotFound.Code)
+
+	var total int64
+	var companies []model.Company
+	countRes := c.db.Model(&model.Company{}).Where(
+		"name ILIKE ? OR industry ILIKE ? OR headquarters ILIKE ?",
+		"%"+filter.Search+"%", "%"+filter.Search+"%", "%"+filter.Search+"%",
+	).Count(&total)
+
+	if countRes.Error != nil {
+		slog.Error("Failed to count companies", slog.Any("error", countRes.Error), slog.String("search", filter.Search))
+		return dto.PaginatedResponse[[]model.Company]{}, countRes.Error
 	}
-	slog.Info("Company fetched by name", slog.String("name", name))
-	return company, nil
+
+	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
+
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
+	}
+
+	offset := int((filter.Page - 1) * filter.Per_page)
+
+	res := c.db.Where(
+		"name ILIKE ? OR industry ILIKE ? OR headquarters ILIKE ?",
+		"%"+filter.Search+"%", "%"+filter.Search+"%", "%"+filter.Search+"%",
+	).Limit(int(filter.Per_page)).Offset(offset).Find(&companies)
+	if res.Error != nil {
+		slog.Error("Failed to fetch companies by name", slog.String("name", name), slog.Any("error", res.Error))
+		return dto.PaginatedResponse[[]model.Company]{}, errors.New(localization.ErrorCompanyNotFound.Code)
+	}
+	slog.Info("Companies fetched by name", slog.String("name", name))
+	return dto.PaginatedResponse[[]model.Company]{
+		Data: companies,
+		Meta: dto.MetaData{
+			TotalCount: total,
+			Page:       filter.Page,
+			PerPage:    filter.Per_page,
+			TotalPage:  totalPage,
+		},
+	}, nil
 }
 
 func NewCompanyRepository(db *gorm.DB) storage.CompanyRepository {

@@ -64,15 +64,9 @@ func (u UserRepository) GetUsersByPagination(ctx *fiber.Ctx, filter dto.Filter) 
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
 
 	if filter.Page*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.User]{
-			Data: []model.User{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
 
 	}
 	offset := int((filter.Page - 1) * filter.Per_page)

@@ -116,6 +116,9 @@ func UploadFilesToCloudinary(ctx *fiber.Ctx, cloudinaryClient *cloudinary.Cloudi
 	var fileURLs []string
 
 	for _, fileHeader := range files {
+		if fileHeader == nil {
+			continue
+		}
 		file, err := fileHeader.Open()
 		if err != nil {
 			slog.Error("Failed to open file", "filename", fileHeader.Filename, "error", err)

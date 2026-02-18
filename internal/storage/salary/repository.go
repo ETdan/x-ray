@@ -67,20 +67,15 @@ func (s *SalaryRepository) FindByPagination(ctx *fiber.Ctx, companyID string, fi
 		return dto.PaginatedResponse[[]model.Salary]{}, countRes.Error
 	}
 
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
 
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Salary]{
-			Data: []model.Salary{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := s.db.Where(
 		"company_id = ? AND (job_title ILIKE ? OR experience ILIKE ? OR position ILIKE ?)",
@@ -119,20 +114,15 @@ func (s *SalaryRepository) GetSalariesByPagination(ctx *fiber.Ctx, filter dto.Fi
 		return dto.PaginatedResponse[[]model.Salary]{}, countRes.Error
 	}
 
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
 
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Salary]{
-			Data: []model.Salary{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := s.db.Where(
 		"job_title ILIKE ? OR experience ILIKE ? OR position ILIKE ?",
@@ -168,20 +158,15 @@ func (s *SalaryRepository) GetSalaryByCompanyID(ctx *fiber.Ctx, companyID string
 		return dto.PaginatedResponse[[]model.Salary]{}, countRes.Error
 	}
 
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
 
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Salary]{
-			Data: []model.Salary{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := s.db.Model(&model.Salary{}).Where(
 		"company_id = ?", companyID).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&salaries)
@@ -238,19 +223,15 @@ func (s *SalaryRepository) GetSalaryByUserID(ctx *fiber.Ctx, userID string, filt
 		slog.Error("Failed to count salaries by user ID", slog.String("user_id", userID), slog.Any("error", countErr.Error))
 		return dto.PaginatedResponse[[]model.Salary]{}, countErr.Error
 	}
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Salary]{
-			Data: []model.Salary{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := s.db.Where("user_id = ?", userUUID).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&salaries)
 	if res.Error != nil {

@@ -29,7 +29,7 @@ type RefreshTokenRepository interface {
 
 // below are repository related to business logic
 type CompanyRepository interface {
-	GetCompanyByName(ctx *fiber.Ctx, name string) (model.Company, error)
+	GetCompanyByName(ctx *fiber.Ctx, name string, filter dto.Filter) (dto.PaginatedResponse[[]model.Company], error)
 	GetCompanyByID(ctx *fiber.Ctx, companyID string) (model.Company, error)
 	CreateCompany(ctx *fiber.Ctx, company *dto.CreateCompanyRepoReq) error
 	FindByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.Company], error)

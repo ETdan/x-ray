@@ -66,16 +66,11 @@ func (i *InterviewRepository) FindByPagination(ctx *fiber.Ctx, companyID string,
 		return dto.PaginatedResponse[[]model.Interview]{}, countRes.Error
 	}
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
+
 	if filter.Page*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.Interview]{
-			Data: []model.Interview{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
 
 	}
 	offset := int((filter.Page - 1) * filter.Per_page)
@@ -118,16 +113,12 @@ func (i *InterviewRepository) GetInterviewByCompanyID(ctx *fiber.Ctx, companyID 
 		return dto.PaginatedResponse[[]model.Interview]{}, countErr.Error
 	}
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
+
 	if filter.Page*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.Interview]{
-			Data: []model.Interview{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
 
 	offset := int((filter.Page - 1) * filter.Per_page)
@@ -187,20 +178,16 @@ func (i *InterviewRepository) GetInterviewByUserID(ctx *fiber.Ctx, userID string
 	}
 
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
+
 	if filter.Page*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.Interview]{
-			Data: []model.Interview{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 	var interviews []model.Interview
-	offset := int((filter.Page - 1) * filter.Per_page)
-	res := i.db.Where(&model.Interview{UserID: userUUID}).Limit(int(filter.Per_page)).Offset(offset).Find(&interviews)
+	res := i.db.Where(&model.Interview{UserID: userUUID}).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&interviews)
 	if res.Error != nil {
 		slog.Error("Failed to fetch interviews by user ID", slog.String("user_id", userID), slog.Any("error", res.Error))
 		return dto.PaginatedResponse[[]model.Interview]{}, res.Error
@@ -231,23 +218,19 @@ func (i *InterviewRepository) GetInterviewsByPagination(ctx *fiber.Ctx, filter d
 		return dto.PaginatedResponse[[]model.Interview]{}, countRes.Error
 	}
 	totalPage := (total + int64(filter.Per_page) - 1) / int64(filter.Per_page)
-	if (filter.Page-1)*filter.Per_page > total {
-		return dto.PaginatedResponse[[]model.Interview]{
-			Data: []model.Interview{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPage,
-			},
-		}, nil
+
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
 
-	offset := int((filter.Page - 1) * filter.Per_page)
+	offset := (filter.Page - 1) * filter.Per_page
 	res := i.db.Where(
 		"job_title ILIKE ? OR description ILIKE ?",
 		"%"+filter.Search+"%", "%"+filter.Search+"%",
-	).Limit(int(filter.Per_page)).Offset(offset).Find(&interviews)
+	).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&interviews)
 
 	if res.Error != nil {
 		slog.Error("Failed to fetch interviews", slog.Any("error", res.Error), slog.String("search", filter.Search))

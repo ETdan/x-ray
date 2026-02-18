@@ -13,7 +13,6 @@ import (
 	"github.com/etdan/x-ray/internal/storage"
 	"github.com/etdan/x-ray/utils"
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 )
 
 type CompanyService struct {
@@ -25,9 +24,9 @@ type CompanyService struct {
 // CreateCompany implements [service.CompanyService].
 func (c *CompanyService) CreateCompany(ctx *fiber.Ctx, req *dto.CreateCompanyReq) error {
 	slog.Info("create company service", "req:", req)
-	if company, err := c.companyRepo.GetCompanyByName(ctx, req.Name); err != nil && err.Error() != localization.ErrorCompanyNotFound.Code {
+	if company, err := c.companyRepo.GetCompanyByName(ctx, req.Name, dto.Filter{Search: req.Name, Page: 1, Per_page: 10}); err != nil && err.Error() != localization.ErrorCompanyNotFound.Code {
 		return errors.New(localization.ErrorInternalServerError.Code)
-	} else if company.ID != uuid.Nil {
+	} else if company.Data != nil && len(company.Data) > 0 {
 		return errors.New(localization.ErrorCompanyAlreadyExists.Message)
 	}
 
@@ -43,13 +42,16 @@ func (c *CompanyService) CreateCompany(ctx *fiber.Ctx, req *dto.CreateCompanyReq
 	repoReq := dto.CreateCompanyRepoReq{
 		UserID:       req.UserID,
 		Name:         req.Name,
-		Logo:         logoUrl[0],
 		Website:      req.Website,
 		Industry:     req.Industry,
 		Size:         req.Size,
 		Headquarters: req.Headquarters,
 		Description:  req.Description,
 		Album:        albumsUrl,
+	}
+	if logoUrl != nil {
+		repoReq.Logo = logoUrl[0]
+
 	}
 
 	if err := c.companyRepo.CreateCompany(ctx, &repoReq); err != nil {

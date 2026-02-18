@@ -68,20 +68,15 @@ func (r *ReviewRepository) FindByPagination(ctx *fiber.Ctx, filter dto.Filter) (
 		return dto.PaginatedResponse[[]model.Review]{}, countRes.Error
 	}
 
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
 
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Review]{
-			Data: []model.Review{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := r.db.Model(&model.Review{}).Where(
 		"summary ILIKE ? OR description ILIKE ?",
@@ -116,20 +111,15 @@ func (r *ReviewRepository) GetReviewByCompanyID(ctx *fiber.Ctx, companyID string
 		return dto.PaginatedResponse[[]model.Review]{}, countRes.Error
 	}
 
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
 
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Review]{
-			Data: []model.Review{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := r.db.Model(&model.Review{}).Where(
 		"company_id = ?", companyID).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&reviews)
@@ -186,19 +176,15 @@ func (r *ReviewRepository) GetReviewByUserID(ctx *fiber.Ctx, userID string, filt
 		slog.Error("Failed to count reviews by user ID", slog.String("user_id", userID), slog.Any("error", countErr.Error))
 		return dto.PaginatedResponse[[]model.Review]{}, countErr.Error
 	}
-	offset := (filter.Page - 1) * filter.Per_page
 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
-	if offset >= total {
-		return dto.PaginatedResponse[[]model.Review]{
-			Data: []model.Review{},
-			Meta: dto.MetaData{
-				TotalCount: total,
-				Page:       filter.Page,
-				PerPage:    filter.Per_page,
-				TotalPage:  totalPages,
-			},
-		}, nil
+
+	if filter.Page*filter.Per_page > total {
+		filter.Page = 1
+		filter.Per_page = 10
+		slog.Warn("Requested page exceeds total pages, resetting to default pagination", slog.Any("filter", filter), slog.Int64("total", total))
+
 	}
+	offset := (filter.Page - 1) * filter.Per_page
 
 	res := r.db.Where("user_id = ?", userUUID).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&reviews)
 	if res.Error != nil {
@@ -216,66 +202,6 @@ func (r *ReviewRepository) GetReviewByUserID(ctx *fiber.Ctx, userID string, filt
 		},
 	}, nil
 }
-
-// // GetReviewsByPagination implements [storage.ReviewRepository].
-// func (r *ReviewRepository) GetReviewsByPagination(ctx *fiber.Ctx, filter dto.Filter) (dto.PaginatedResponse[[]model.Review], error) {
-// 	var total int64
-// 	var reviews []model.Review
-// 	companyID := ""
-// 	if filter.Search != "" {
-// 		companyID = filter.Search
-// 	}
-// 	companyUUID, err := uuid.Parse(companyID)
-// 	if err != nil {
-// 		slog.Error("Invalid company id", slog.String("company_id", companyID), slog.Any("error", err))
-// 		return dto.PaginatedResponse[[]model.Review]{}, err
-// 	}
-
-// 	countRes := r.db.Model(&model.Review{}).Where(
-// 		"company_id = ?", companyUUID,
-// 	).Count(&total)
-// 	if countRes.Error != nil {
-// 		slog.Error("Failed to count reviews", slog.Any("error", countRes.Error), slog.String("search", filter.Search))
-// 		return dto.PaginatedResponse[[]model.Review]{}, countRes.Error
-// 	}
-
-// 	offset := (filter.Page - 1) * filter.Per_page
-// 	totalPages := (total + filter.Per_page - 1) / filter.Per_page
-
-// 	if offset >= total {
-// 		return dto.PaginatedResponse[[]model.Review]{
-// 			Data: []model.Review{},
-// 			Meta: dto.MetaData{
-// 				TotalCount: total,
-// 				Page:       filter.Page,
-// 				PerPage:    filter.Per_page,
-// 				TotalPage:  totalPages,
-// 			},
-// 		}, nil
-// 	}
-
-// 	res := r.db.Where(
-// 		"summary ILIKE ? OR description ILIKE ?",
-// 		"%"+filter.Search+"%", "%"+filter.Search+"%",
-// 	).Limit(int(filter.Per_page)).Offset(int(offset)).Find(&reviews)
-
-// 	if res.Error != nil {
-// 		slog.Error("Failed to fetch reviews", slog.Any("error", res.Error), slog.String("search", filter.Search))
-// 		return dto.PaginatedResponse[[]model.Review]{}, res.Error
-// 	}
-
-// 	slog.Info("Reviews fetched successfully", slog.Int("count", len(reviews)), slog.String("search", filter.Search))
-
-// 	return dto.PaginatedResponse[[]model.Review]{
-// 		Data: reviews,
-// 		Meta: dto.MetaData{
-// 			TotalCount: total,
-// 			Page:       filter.Page,
-// 			PerPage:    filter.Per_page,
-// 			TotalPage:  totalPages,
-// 		},
-// 	}, nil
-// }
 
 func NewReviewRepository(db *gorm.DB) storage.ReviewRepository {
 	return &ReviewRepository{
