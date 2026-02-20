@@ -127,20 +127,18 @@ func (c *companyHandler) GetCompaniesByPagination(ctx *fiber.Ctx) {
 //	@Accept			json
 //	@Produce		json
 //	@Security BearerToken
-//	@Param			company_id	query		string												true	"Company ID (UUID)"
-//	@Success		200			{object}	localization.StandardResponse{data=dto.CompanyRes}	"Company fetched successfully"
-//	@Failure		400			{object}	localization.StandardResponse						"Missing company_id parameter"
-//	@Failure		404			{object}	localization.StandardResponse						"Company not found"
-//	@Failure		500			{object}	localization.StandardResponse						"Internal server error"
-//	@Router			/company/detail [get]
+//	@Param			id	path	string	true	"Company ID (UUID)"
+//	@Success		200	{object}	localization.StandardResponse{data=dto.CompanyRes}	"Company fetched successfully"
+//	@Failure		400	{object}	localization.StandardResponse	"Missing or invalid company id path parameter"
+//	@Failure		404	{object}	localization.StandardResponse	"Company not found"
+//	@Failure		500	{object}	localization.StandardResponse	"Internal server error"
+//	@Router		/company/{id} [get]
 //
 // GetCompanyByID implements [port.CompanyHandler].
 func (c *companyHandler) GetCompanyByID(ctx *fiber.Ctx) {
-	q := ctx.Queries()
-
-	id, ok := q["company_id"]
-	if !ok {
-		slog.Error("company_id query param is required")
+	id := ctx.Params("id")
+	if id == "" {
+		slog.Error("company id path param is required")
 		localization.SendErrorResponse(ctx, localization.ErrorBadRequest.Code)
 		return
 	}
