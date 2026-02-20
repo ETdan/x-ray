@@ -21,7 +21,7 @@ func InitCompanyRoute(r fiber.Router, handler port.CompanyHandler, authMiddlewar
 		},
 		{
 			Method:  http.MethodGet,
-			Path:    "/company/{id}",
+			Path:    "/company/:id",
 			Handler: handler.GetCompanyByID,
 			Middlewares: []fiber.Handler{
 				authMiddleware.Authentication,
