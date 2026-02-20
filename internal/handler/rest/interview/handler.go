@@ -38,7 +38,7 @@ func (u *interviewHandler) CreateInterview(c *fiber.Ctx) {
 		localization.SendErrorResponse(c, localization.ErrorBadRequest.Code)
 		return
 	}
-	if req.Difficulty.IsValid() {
+	if !req.Difficulty.IsValid() {
 		slog.Info("invalid difficulty value")
 		localization.SendErrorResponse(c, localization.ErrorBadRequest.Code)
 		return
