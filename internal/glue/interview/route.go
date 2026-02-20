@@ -29,7 +29,7 @@ func InitInterviewRoute(r fiber.Router, handler port.InterviewHandler, authMiddl
 		},
 		{
 			Method:  http.MethodGet,
-			Path:    "/interview/{id}",
+			Path:    "/interview/:interview_id",
 			Handler: handler.GetInterviewByID,
 			Middlewares: []fiber.Handler{
 				authMiddleware.Authentication,
@@ -37,7 +37,7 @@ func InitInterviewRoute(r fiber.Router, handler port.InterviewHandler, authMiddl
 		},
 		{
 			Method:  http.MethodGet,
-			Path:    "/interview/company/{id}",
+			Path:    "/interview/company/:company_id",
 			Handler: handler.GetInterviewByCompanyID,
 			Middlewares: []fiber.Handler{
 				authMiddleware.Authentication,
@@ -45,7 +45,7 @@ func InitInterviewRoute(r fiber.Router, handler port.InterviewHandler, authMiddl
 		},
 		{
 			Method:  http.MethodGet,
-			Path:    "/interview/user/{id}",
+			Path:    "/interview/user/:user_id",
 			Handler: handler.GetInterviewByUserID,
 			Middlewares: []fiber.Handler{
 				authMiddleware.Authentication,

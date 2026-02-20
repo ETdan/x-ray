@@ -38,7 +38,7 @@ func (u UserRepository) FindUserByGoogleID(ctx *fiber.Ctx, googleID string) (mod
 func (u UserRepository) FindUserByUserID(ctx *fiber.Ctx, userID string) (model.User, error) {
 	slog.Info("find user by user id repository", "userID:", userID)
 	var user model.User
-	res := u.db.Where("id ?", userID).First(&user)
+	res := u.db.Where("id = ?", userID).First(&user)
 	if res.Error != nil {
 		slog.Error("Failed to fetch user by user id", slog.String("userID", userID), slog.Any("error", res.Error))
 		return model.User{}, errors.New(localization.ErrorRecordNotFound.Code)
