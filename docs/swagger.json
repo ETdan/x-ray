@@ -325,7 +325,7 @@
                 }
             }
         },
-        "/company/detail": {
+        "/company/{id}": {
             "get": {
                 "security": [
                     {
@@ -347,8 +347,8 @@
                     {
                         "type": "string",
                         "description": "Company ID (UUID)",
-                        "name": "company_id",
-                        "in": "query",
+                        "name": "id",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -372,7 +372,7 @@
                         }
                     },
                     "400": {
-                        "description": "Missing company_id parameter",
+                        "description": "Missing or invalid company id path parameter",
                         "schema": {
                             "$ref": "#/definitions/localization.StandardResponse"
                         }

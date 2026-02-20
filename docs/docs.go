@@ -331,7 +331,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/company/detail": {
+        "/company/{id}": {
             "get": {
                 "security": [
                     {
@@ -353,8 +353,8 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Company ID (UUID)",
-                        "name": "company_id",
-                        "in": "query",
+                        "name": "id",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -378,7 +378,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Missing company_id parameter",
+                        "description": "Missing or invalid company id path parameter",
                         "schema": {
                             "$ref": "#/definitions/localization.StandardResponse"
                         }
