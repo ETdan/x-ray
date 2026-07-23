@@ -22,6 +22,7 @@ func MapListModelToListDTOInterview(modelInterview []model.Interview) []dto.Inte
 		interviews = append(interviews, dto.InterviewRes{
 			ID:          interview.ID,
 			CompanyID:   interview.CompanyID.String(),
+			JobTitle:    interview.JobTitle,
 			GotOffer:    *interview.GotOffer,
 			Difficulty:  dto.Difficulty(interview.Difficulty),
 			Experience:  interview.Experience,
