@@ -1,18 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50">
       <header className="bg-white shadow-soft p-4">
         <nav className="container mx-auto flex justify-between items-center">
-          <div className="font-bold text-xl text-primary">X-Ray</div>
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary transition-opacity hover:opacity-80">
+             {/* Using text logo for now as requested, we can swap this with an img tag once the logo asset is provided */}
+             X-Ray
+          </Link>
           <div className="flex gap-4">
-            <a href="/" className="hover:text-primary transition-colors">Home</a>
-            <a href="/jobs" className="hover:text-primary transition-colors">Jobs</a>
-            <a href="/companies" className="hover:text-primary transition-colors">Companies</a>
-            <a href="/salaries" className="hover:text-primary transition-colors">Salaries</a>
-            <a href="/reviews" className="hover:text-primary transition-colors">Reviews</a>
-            <a href="/interviews" className="hover:text-primary transition-colors">Interviews</a>
+            <Link to="/jobs" className="hover:text-primary transition-colors">Jobs</Link>
+            <Link to="/companies" className="hover:text-primary transition-colors">Companies</Link>
+            <Link to="/salaries" className="hover:text-primary transition-colors">Salaries</Link>
+            <Link to="/reviews" className="hover:text-primary transition-colors">Reviews</Link>
+            <Link to="/interviews" className="hover:text-primary transition-colors">Interviews</Link>
           </div>
         </nav>
       </header>
