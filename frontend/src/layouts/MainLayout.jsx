@@ -1,14 +1,13 @@
-import { Outlet } from "react-router-dom";
-import logo from "../assets/logo.svg"; 
+import { Outlet, Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50">
       <header className="bg-white shadow-soft p-4">
         <nav className="container mx-auto flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary transition-opacity hover:opacity-80">
-             {/* Using text logo for now as requested, we can swap this with an img tag once the logo asset is provided */}
-             {{logo}}
+          <Link to="/" className="flex items-center transition-opacity hover:opacity-80">
+             <img src={logo} alt="X-Ray Logo" className="h-8 w-auto fill-primary" />
           </Link>
           <div className="flex gap-4">
             <a href="/jobs" className="hover:text-primary transition-colors">Jobs</a>

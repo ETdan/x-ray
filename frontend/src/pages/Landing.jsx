@@ -23,6 +23,7 @@ export default function Landing() {
           <div className="flex gap-2">
             <Link to="/companies" className="hover:text-primary transition-colors">Safaricom</Link>
             
+
             <span>•</span>
             <Link to="/jobs" className="hover:text-primary transition-colors">Software Engineer</Link>
           </div>
