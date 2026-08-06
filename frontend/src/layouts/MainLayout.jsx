@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50">
       <header className="bg-white shadow-soft p-4">
         <nav className="container mx-auto flex justify-between items-center">
-          <div className="font-bold text-xl text-primary">X-Ray</div>
+          <Link to="/" className="flex items-center transition-opacity hover:opacity-80">
+             <img src={logo} alt="X-Ray Logo" className="h-8 w-auto fill-primary" />
+          </Link>
           <div className="flex gap-4">
-            <a href="/" className="hover:text-primary transition-colors">Home</a>
             <a href="/jobs" className="hover:text-primary transition-colors">Jobs</a>
             <a href="/companies" className="hover:text-primary transition-colors">Companies</a>
             <a href="/salaries" className="hover:text-primary transition-colors">Salaries</a>
