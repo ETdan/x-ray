@@ -10,11 +10,11 @@ export default function MainLayout() {
              <img src={logo} alt="X-Ray Logo" className="h-8 w-auto fill-primary" />
           </Link>
           <div className="flex gap-4">
-            <Link to="/jobs" className="hover:text-primary transition-colors">Jobs</Link>
-            <Link to="/companies" className="hover:text-primary transition-colors">Companies</Link>
-            <Link to="/salaries" className="hover:text-primary transition-colors">Salaries</Link>
-            <Link to="/reviews" className="hover:text-primary transition-colors">Reviews</Link>
-            <Link to="/interviews" className="hover:text-primary transition-colors">Interviews</Link>
+            <a href="/jobs" className="hover:text-primary transition-colors">Jobs</a>
+            <a href="/companies" className="hover:text-primary transition-colors">Companies</a>
+            <a href="/salaries" className="hover:text-primary transition-colors">Salaries</a>
+            <a href="/reviews" className="hover:text-primary transition-colors">Reviews</a>
+            <a href="/interviews" className="hover:text-primary transition-colors">Interviews</a>
           </div>
         </nav>
       </header>
