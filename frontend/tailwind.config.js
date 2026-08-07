@@ -7,28 +7,56 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#4F46E5",
-        neutral: {
-          50: "#F8FAFC",
-          200: "#E2E8F0",
-          500: "#64748B",
-          800: "#1E293B",
+        ink: {
+          DEFAULT: "#111827", // Deep Ink Black
+          light: "#374151",
+          muted: "#6B7280",
         },
-        success: "#22C55E",
-        danger: "#EF4444",
-        warning: "#F59E0B",
-      },
-      spacing: {
-        // Tailwind's default spacing is already a 4px scale,
-        // e.g. p-1 is 4px, p-2 is 8px.
-      },
-      borderRadius: {
-        'sm': '8px',
-        'md': '12px',
-        'lg': '16px',
+        paper: {
+          DEFAULT: "#FDFBF7", // Warm Cream / Paper White
+          dark: "#F4F1EA",
+        },
+        primary: {
+          DEFAULT: "#1E3A8A", // Prussian Blue
+          light: "#3B82F6",
+        },
+        accent: {
+          vermilion: "#DC2626", // Vermilion / Red
+          ochre: "#D97706",    // Ochre / Mustard Yellow
+          green: "#059669",    // Muted Green
+          indigo: "#4F46E5",   // Indigo
+        },
+        neutral: {
+          50: "#FDFBF7",
+          100: "#F4F1EA",
+          200: "#E5E1D8",
+          300: "#D1CFC7",
+          400: "#9CA3AF",
+          500: "#6B7280",
+          800: "#1F2937",
+          900: "#111827",
+        },
+        success: "#059669", // Muted Green
+        danger: "#DC2626", // Vermilion
+        warning: "#D97706", // Ochre
       },
       boxShadow: {
-        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        'brutal': '4px 4px 0px 0px rgba(17, 24, 39, 1)',
+        'brutal-sm': '2px 2px 0px 0px rgba(17, 24, 39, 1)',
+        'brutal-lg': '8px 8px 0px 0px rgba(17, 24, 39, 1)',
+        'brutal-hover': '6px 6px 0px 0px rgba(17, 24, 39, 1)',
+      },
+      borderWidth: {
+        '3': '3px',
+      },
+      fontFamily: {
+        sans: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'], // Or any striking sans
+        serif: ['Merriweather', 'Georgia', 'serif'], // Editorial feel
+        mono: ['Space Mono', 'ui-monospace', 'monospace'],
+      },
+      backgroundImage: {
+        'halftone': 'radial-gradient(circle, #D1CFC7 1px, transparent 1px)',
+        'stripes': 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(17,24,39,0.05) 10px, rgba(17,24,39,0.05) 20px)',
       }
     },
   },

@@ -23,7 +23,6 @@ export default function Login() {
   });
 
   const onSubmit = async (data) => {
-    // Simulate login API call
     console.log("Login data:", data);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     navigate("/");
@@ -31,12 +30,12 @@ export default function Login() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-neutral-800">Welcome back</h2>
-        <p className="text-sm text-neutral-500 mt-1">Log in to your account</p>
+      <div className="text-center border-b-2 border-ink pb-6 mb-2">
+        <h2 className="text-3xl font-bold uppercase tracking-tight">Welcome Back</h2>
+        <p className="font-mono text-sm text-ink/70 mt-2">ACCESS YOUR DASHBOARD</p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Input
           id="email"
           label="Email address"
@@ -54,52 +53,50 @@ export default function Login() {
           error={errors.password?.message}
         />
 
-        <div className="flex items-center justify-between mt-[-4px]">
-          <div className="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              className="h-4 w-4 text-primary focus:ring-primary border-neutral-200 rounded"
-            />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-neutral-800">
-              Remember me
-            </label>
-          </div>
-          <div className="text-sm">
-            <a href="#" className="font-medium text-primary hover:text-indigo-500">
-              Forgot your password?
-            </a>
-          </div>
+        <div className="flex items-center justify-between -mt-1 mb-2">
+          <label className="flex items-center gap-2 text-sm font-bold cursor-pointer group">
+            <div className="relative flex items-center justify-center w-5 h-5 border-2 border-ink bg-white group-hover:shadow-brutal-sm transition-shadow">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="peer absolute opacity-0 w-full h-full cursor-pointer"
+              />
+              <svg className="hidden peer-checked:block w-3 h-3 text-ink" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M1 5L5 9L13 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <span>Remember me</span>
+          </label>
+
+          <a href="#" className="text-sm font-bold text-accent-indigo hover:text-ink hover:underline decoration-2 underline-offset-4 transition-colors">
+            Forgot password?
+          </a>
         </div>
 
-        <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
-          {isSubmitting ? "Signing in..." : "Sign in"}
+        <Button type="submit" disabled={isSubmitting} className="w-full text-lg">
+          {isSubmitting ? "SIGNING IN..." : "SIGN IN"}
         </Button>
       </form>
 
-      <div className="relative my-2">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-neutral-200" />
-        </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-neutral-500">Or continue with</span>
-        </div>
+      <div className="relative my-4 flex items-center justify-center">
+        <div className="absolute w-full border-t-2 border-ink"></div>
+        <span className="relative bg-paper px-4 font-mono text-sm font-bold uppercase text-ink/70">Or Continue With</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <Button variant="outline" className="w-full flex gap-2">
-          <FcGoogle size={20} /> Google
+      <div className="grid grid-cols-2 gap-4">
+        <Button variant="outline" className="w-full flex items-center gap-2">
+          <FcGoogle size={20} /> <span className="hidden sm:inline">Google</span>
         </Button>
-        <Button variant="outline" className="w-full flex gap-2">
-          <FaTelegram size={20} className="text-[#26A5E4]" /> Telegram
+        <Button variant="outline" className="w-full flex items-center gap-2">
+          <FaTelegram size={20} className="text-[#26A5E4]" /> <span className="hidden sm:inline">Telegram</span>
         </Button>
       </div>
 
-      <p className="text-center text-sm text-neutral-500 mt-2">
-        Don't have an account?{" "}
-        <Link to="/register" className="font-medium text-primary hover:text-indigo-500">
-          Sign up
+      <p className="text-center font-mono text-sm mt-4">
+        NEW TO X-RAY?{" "}
+        <Link to="/register" className="font-bold text-accent-vermilion hover:text-ink hover:underline decoration-2 underline-offset-4 transition-colors">
+          CREATE ACCOUNT
         </Link>
       </p>
     </div>

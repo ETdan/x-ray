@@ -1,17 +1,18 @@
 import { forwardRef } from "react";
 
 const variants = {
-  primary: "bg-primary text-white hover:bg-indigo-700 border border-transparent",
-  secondary: "bg-neutral-200 text-neutral-800 hover:bg-neutral-300 border border-transparent",
-  outline: "bg-transparent text-neutral-800 border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50",
-  ghost: "bg-transparent text-neutral-800 hover:bg-neutral-100 border border-transparent",
-  destructive: "bg-danger text-white hover:bg-red-600 border border-transparent",
+  primary: "bg-ink text-paper hover:-translate-y-1 hover:shadow-brutal-hover",
+  secondary: "bg-paper text-ink hover:bg-paper-dark hover:-translate-y-1 hover:shadow-brutal-hover",
+  outline: "bg-transparent text-ink border-ink hover:bg-paper-dark hover:-translate-y-1 hover:shadow-brutal-hover",
+  ghost: "bg-transparent text-ink border-transparent shadow-none hover:bg-paper-dark hover:border-ink hover:shadow-brutal-sm",
+  destructive: "bg-accent-vermilion text-white border-ink hover:-translate-y-1 hover:shadow-brutal-hover",
+  accent: "bg-accent-indigo text-white border-ink hover:-translate-y-1 hover:shadow-brutal-hover"
 };
 
 const sizes = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2 text-base",
-  lg: "px-6 py-3 text-lg",
+  sm: "px-4 py-2 text-sm font-bold",
+  md: "px-6 py-3 text-base font-bold",
+  lg: "px-8 py-4 text-lg font-bold",
 };
 
 export const Button = forwardRef(
@@ -21,7 +22,7 @@ export const Button = forwardRef(
         ref={ref}
         type={type}
         disabled={disabled}
-        className={`inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`inline-flex items-center justify-center rounded-none border-2 border-ink shadow-brutal transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2 focus:ring-offset-paper disabled:opacity-50 disabled:pointer-events-none active:translate-y-0 active:shadow-none ${variants[variant]} ${sizes[size]} ${className}`}
         {...props}
       >
         {children}
