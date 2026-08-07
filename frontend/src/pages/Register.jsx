@@ -71,8 +71,8 @@ export default function Register() {
       </form>
 
       <div className="relative my-4 flex items-center justify-center">
-        <div className="absolute w-full border-t border-ink/10"></div>
-        <span className="relative bg-white px-4 text-xs font-medium uppercase text-neutral-500">Or register with</span>
+        <div className="absolute w-full border-t border-neutral-300"></div>
+        <span className="relative bg-surface px-4 text-xs font-medium uppercase text-neutral-500">Or register with</span>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
