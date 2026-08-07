@@ -9,24 +9,23 @@ export function SearchBar({ className = "", size = "md" }) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      // In a real app, this might route to a global search page or open a modal
       navigate(`/companies?search=${encodeURIComponent(query)}`);
     }
   };
 
-  const heightClass = size === "lg" ? "h-14" : "h-10";
-  const iconSize = size === "lg" ? 24 : 18;
-  const textSize = size === "lg" ? "text-lg" : "text-sm";
+  const heightClass = size === "lg" ? "h-16" : "h-12";
+  const iconSize = size === "lg" ? 24 : 20;
+  const textSize = size === "lg" ? "text-xl" : "text-base";
 
   return (
-    <form onSubmit={handleSearch} className={`relative w-full ${className}`}>
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-500">
-        <FiSearch size={iconSize} />
+    <form onSubmit={handleSearch} className={`relative w-full group ${className}`}>
+      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-ink">
+        <FiSearch size={iconSize} strokeWidth={3} />
       </div>
       <input
         type="text"
-        className={`block w-full pl-10 pr-3 py-2 border border-neutral-200 rounded-md leading-5 bg-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-150 ease-in-out sm:leading-5 ${heightClass} ${textSize}`}
-        placeholder="Search companies, jobs, salaries..."
+        className={`block w-full pl-12 pr-4 py-3 border-2 border-ink rounded-none bg-white placeholder-ink/50 shadow-brutal transition-all focus:outline-none focus:shadow-brutal-hover focus:-translate-y-1 font-bold ${heightClass} ${textSize}`}
+        placeholder="Search companies, salaries..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

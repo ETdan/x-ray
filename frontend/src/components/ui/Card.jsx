@@ -1,7 +1,7 @@
 export function Card({ className = "", children, ...props }) {
   return (
     <div
-      className={`bg-white rounded-lg border border-neutral-200 shadow-soft overflow-hidden ${className}`}
+      className={`bg-paper border-2 border-ink shadow-brutal rounded-none overflow-hidden relative ${className}`}
       {...props}
     >
       {children}
@@ -10,17 +10,29 @@ export function Card({ className = "", children, ...props }) {
 }
 
 export function CardHeader({ className = "", children }) {
-  return <div className={`px-6 py-4 border-b border-neutral-200 ${className}`}>{children}</div>;
+  return (
+    <div className={`px-6 py-5 border-b-2 border-ink bg-paper-dark ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 export function CardTitle({ className = "", children }) {
-  return <h3 className={`text-lg font-semibold text-neutral-800 ${className}`}>{children}</h3>;
+  return (
+    <h3 className={`text-xl font-bold text-ink uppercase tracking-wide ${className}`}>
+      {children}
+    </h3>
+  );
 }
 
 export function CardContent({ className = "", children }) {
-  return <div className={`p-6 ${className}`}>{children}</div>;
+  return <div className={`p-6 md:p-8 ${className}`}>{children}</div>;
 }
 
 export function CardFooter({ className = "", children }) {
-  return <div className={`px-6 py-4 bg-neutral-50 border-t border-neutral-200 ${className}`}>{children}</div>;
+  return (
+    <div className={`px-6 py-4 bg-paper-dark border-t-2 border-ink ${className}`}>
+      {children}
+    </div>
+  );
 }
