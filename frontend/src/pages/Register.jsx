@@ -34,9 +34,9 @@ export default function Register() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="text-center border-b-2 border-ink pb-6 mb-2">
-        <h2 className="text-3xl font-bold uppercase tracking-tight">Create Account</h2>
-        <p className="font-mono text-sm text-ink/70 mt-2">JOIN X-RAY TODAY</p>
+      <div className="text-center pb-6 mb-2">
+        <h2 className="text-2xl font-bold tracking-tight">Create Account</h2>
+        <p className="text-sm text-neutral-500 mt-2">Join X-Ray today</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
@@ -65,29 +65,29 @@ export default function Register() {
           error={errors.confirmPassword?.message}
         />
 
-        <Button type="submit" disabled={isSubmitting} className="w-full text-lg mt-2">
-          {isSubmitting ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
+        <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
+          {isSubmitting ? "Creating account..." : "Create account"}
         </Button>
       </form>
 
       <div className="relative my-4 flex items-center justify-center">
-        <div className="absolute w-full border-t-2 border-ink"></div>
-        <span className="relative bg-paper px-4 font-mono text-sm font-bold uppercase text-ink/70">Or Register With</span>
+        <div className="absolute w-full border-t border-ink/10"></div>
+        <span className="relative bg-white px-4 text-xs font-medium uppercase text-neutral-500">Or register with</span>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button variant="outline" className="w-full flex items-center gap-2">
+        <Button variant="outline" className="w-full flex items-center gap-2 font-medium">
           <FcGoogle size={20} /> <span className="hidden sm:inline">Google</span>
         </Button>
-        <Button variant="outline" className="w-full flex items-center gap-2">
+        <Button variant="outline" className="w-full flex items-center gap-2 font-medium">
           <FaTelegram size={20} className="text-[#26A5E4]" /> <span className="hidden sm:inline">Telegram</span>
         </Button>
       </div>
 
-      <p className="text-center font-mono text-sm mt-4">
-        ALREADY HAVE AN ACCOUNT?{" "}
-        <Link to="/login" className="font-bold text-accent-vermilion hover:text-ink hover:underline decoration-2 underline-offset-4 transition-colors">
-          SIGN IN
+      <p className="text-center text-sm mt-4 text-neutral-600">
+        Already have an account?{" "}
+        <Link to="/login" className="font-medium text-primary hover:text-primary-light transition-colors">
+          Sign in
         </Link>
       </p>
     </div>

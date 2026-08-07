@@ -41,22 +41,23 @@ export default {
         warning: "#D97706", // Ochre
       },
       boxShadow: {
-        'brutal': '4px 4px 0px 0px rgba(17, 24, 39, 1)',
-        'brutal-sm': '2px 2px 0px 0px rgba(17, 24, 39, 1)',
-        'brutal-lg': '8px 8px 0px 0px rgba(17, 24, 39, 1)',
-        'brutal-hover': '6px 6px 0px 0px rgba(17, 24, 39, 1)',
+        'editorial': '0 4px 14px 0 rgba(17, 24, 39, 0.05), 0 2px 4px 0 rgba(17, 24, 39, 0.03)',
+        'editorial-hover': '0 6px 20px 0 rgba(17, 24, 39, 0.08), 0 3px 6px 0 rgba(17, 24, 39, 0.04)',
+        'editorial-sm': '0 1px 3px 0 rgba(17, 24, 39, 0.08), 0 1px 2px 0 rgba(17, 24, 39, 0.04)',
       },
-      borderWidth: {
-        '3': '3px',
+      borderRadius: {
+        'editorial': '12px',
+        'editorial-sm': '8px',
+        'editorial-lg': '16px',
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'], // Or any striking sans
+        sans: ['Inter', 'Space Grotesk', 'system-ui', 'sans-serif'], // Prioritizing readable sans
         serif: ['Merriweather', 'Georgia', 'serif'], // Editorial feel
         mono: ['Space Mono', 'ui-monospace', 'monospace'],
       },
       backgroundImage: {
-        'halftone': 'radial-gradient(circle, #D1CFC7 1px, transparent 1px)',
-        'stripes': 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(17,24,39,0.05) 10px, rgba(17,24,39,0.05) 20px)',
+        'halftone': 'radial-gradient(circle, rgba(17,24,39,0.08) 1px, transparent 1px)',
+        'stripes': 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(17,24,39,0.02) 10px, rgba(17,24,39,0.02) 20px)',
       }
     },
   },
