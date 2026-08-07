@@ -3,9 +3,9 @@ import { forwardRef } from "react";
 export const Input = forwardRef(
   ({ className = "", error, label, helperText, id, type = "text", ...props }, ref) => {
     return (
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <label htmlFor={id} className="text-sm font-bold text-ink uppercase tracking-wider">
+          <label htmlFor={id} className="text-sm font-medium text-ink">
             {label}
           </label>
         )}
@@ -13,16 +13,16 @@ export const Input = forwardRef(
           id={id}
           ref={ref}
           type={type}
-          className={`flex h-12 w-full rounded-none border-2 border-ink bg-white px-4 py-2 text-base text-ink placeholder:text-neutral-400 shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] transition-all focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] focus:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 ${
-            error ? "border-accent-vermilion focus:shadow-[4px_4px_0px_0px_rgba(220,38,38,1)]" : ""
+          className={`flex h-11 w-full rounded-editorial-sm border border-ink/20 bg-white px-4 py-2 text-sm text-ink placeholder:text-neutral-400 shadow-sm transition-all focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 ${
+            error ? "border-accent-vermilion focus:border-accent-vermilion focus:ring-accent-vermilion" : ""
           } ${className}`}
           {...props}
         />
         {error && (
-          <p className="text-sm font-bold text-accent-vermilion mt-1">{error}</p>
+          <p className="text-sm font-medium text-accent-vermilion mt-0.5">{error}</p>
         )}
         {helperText && !error && (
-          <p className="text-sm font-mono text-neutral-500 mt-1">{helperText}</p>
+          <p className="text-sm text-neutral-500 mt-0.5">{helperText}</p>
         )}
       </div>
     );
