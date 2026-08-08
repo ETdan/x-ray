@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Landing from "../pages/Landing";
 import Companies from "../pages/Companies";
+import Company from "../pages/Company";
 import Jobs from "../pages/Jobs";
 import Salaries from "../pages/Salaries";
 import Reviews from "../pages/Reviews";
@@ -17,11 +18,22 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
+
+        {/* Core Discovery */}
         <Route path="/companies" element={<Companies />} />
         <Route path="/jobs" element={<Jobs />} />
+
+        {/* Company Nested Structure */}
+        <Route path="/company/:id" element={<Company />} />
+        <Route path="/company/:id/write-review" element={<Reviews />} />
+        <Route path="/company/:id/share-salary" element={<Salaries />} />
+        <Route path="/company/:id/share-interview" element={<Interviews />} />
+
+        {/* Legacy/Orphaned routes to be removed once full migration is complete */}
         <Route path="/salaries" element={<Salaries />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/interviews" element={<Interviews />} />
+
         <Route path="/claim-company" element={<ClaimCompany />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
