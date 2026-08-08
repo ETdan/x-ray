@@ -30,9 +30,9 @@ export default function Login() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="text-center pb-6 mb-2">
-        <h2 className="text-2xl font-bold tracking-tight">Welcome Back</h2>
-        <p className="text-sm text-neutral-500 mt-2">Sign in to your account</p>
+      <div className="text-center pb-2">
+        <h2 className="text-2xl font-bold tracking-tight text-text">Welcome back</h2>
+        <p className="text-sm text-text-muted mt-2">Sign in to your account</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
@@ -59,12 +59,12 @@ export default function Login() {
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="w-4 h-4 text-primary border-ink/20 rounded focus:ring-primary"
+              className="w-4 h-4 text-primary border-border rounded focus:ring-primary"
             />
-            <span className="text-ink">Remember me</span>
+            <span className="text-text">Remember me</span>
           </label>
 
-          <a href="#" className="text-sm font-medium text-primary hover:text-primary-light transition-colors">
+          <a href="#" className="text-sm font-medium text-primary hover:text-primary-hover transition-colors">
             Forgot password?
           </a>
         </div>
@@ -75,23 +75,23 @@ export default function Login() {
       </form>
 
       <div className="relative my-4 flex items-center justify-center">
-        <div className="absolute w-full border-t border-neutral-300"></div>
-        <span className="relative bg-surface px-4 text-xs font-medium uppercase text-neutral-500">Or continue with</span>
+        <div className="absolute w-full border-t border-border"></div>
+        <span className="relative bg-surface px-4 text-xs font-medium text-text-muted">Or continue with</span>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button variant="outline" className="w-full flex items-center gap-2 font-medium">
+        <Button variant="outline" className="w-full flex items-center gap-2">
           <FcGoogle size={20} /> <span className="hidden sm:inline">Google</span>
         </Button>
-        <Button variant="outline" className="w-full flex items-center gap-2 font-medium">
+        <Button variant="outline" className="w-full flex items-center gap-2">
           <FaTelegram size={20} className="text-[#26A5E4]" /> <span className="hidden sm:inline">Telegram</span>
         </Button>
       </div>
 
-      <p className="text-center text-sm mt-4 text-neutral-600">
-        New to X-Ray?{" "}
-        <Link to="/register" className="font-medium text-primary hover:text-primary-light transition-colors">
-          Create an account
+      <p className="text-center text-sm mt-4 text-text-muted">
+        Don't have an account?{" "}
+        <Link to="/register" className="font-medium text-primary hover:text-primary-hover transition-colors">
+          Sign up
         </Link>
       </p>
     </div>
