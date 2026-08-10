@@ -10,11 +10,10 @@ export default function MainLayout() {
              <img src={logo} alt="X-Ray Logo" className="h-8 w-auto text-ink" />
           </Link>
           <div className="flex gap-8 font-medium text-sm text-ink/80">
-            <Link to="/jobs" className="hover:text-primary transition-colors">Jobs</Link>
             <Link to="/companies" className="hover:text-primary transition-colors">Companies</Link>
-            <Link to="/salaries" className="hover:text-primary transition-colors">Salaries</Link>
-            <Link to="/reviews" className="hover:text-primary transition-colors">Reviews</Link>
-            <Link to="/interviews" className="hover:text-primary transition-colors">Interviews</Link>
+            <Link to="/jobs" className="hover:text-primary transition-colors">Jobs</Link>
+            <Link to="/login" className="hover:text-primary transition-colors">Sign In</Link>
+            <Link to="/register" className="text-primary hover:text-primary-hover font-semibold transition-colors">Sign Up</Link>
           </div>
         </nav>
       </header>

@@ -1,10 +1,7 @@
-export function Card({ className = "", children, elevation = 1, ...props }) {
-  // Use elevation prop to determine the neumorphic shadow intensity
-  const shadowClass = elevation === 2 ? 'shadow-neu-2' : elevation === 3 ? 'shadow-neu-3' : 'shadow-neu-1';
-
+export function Card({ className = "", children, ...props }) {
   return (
     <div
-      className={`bg-surface rounded-neu-lg overflow-hidden relative transition-shadow duration-300 ${shadowClass} ${className}`}
+      className={`bg-surface border border-border shadow-soft rounded-xl overflow-hidden relative transition-shadow duration-200 hover:shadow-hover ${className}`}
       {...props}
     >
       {children}
@@ -14,7 +11,7 @@ export function Card({ className = "", children, elevation = 1, ...props }) {
 
 export function CardHeader({ className = "", children }) {
   return (
-    <div className={`px-6 py-5 border-b border-neutral-200/50 bg-surface ${className}`}>
+    <div className={`px-6 py-4 border-b border-border bg-surface ${className}`}>
       {children}
     </div>
   );
@@ -22,19 +19,19 @@ export function CardHeader({ className = "", children }) {
 
 export function CardTitle({ className = "", children }) {
   return (
-    <h3 className={`text-xl font-bold text-ink tracking-tight ${className}`}>
+    <h3 className={`text-lg font-semibold text-text ${className}`}>
       {children}
     </h3>
   );
 }
 
 export function CardContent({ className = "", children }) {
-  return <div className={`p-6 md:p-8 ${className}`}>{children}</div>;
+  return <div className={`p-6 ${className}`}>{children}</div>;
 }
 
 export function CardFooter({ className = "", children }) {
   return (
-    <div className={`px-6 py-5 bg-surface border-t border-neutral-200/50 ${className}`}>
+    <div className={`px-6 py-4 bg-surface-secondary border-t border-border ${className}`}>
       {children}
     </div>
   );
