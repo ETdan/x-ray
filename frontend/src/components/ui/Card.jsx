@@ -1,38 +1,61 @@
-export function Card({ className = "", children, ...props }) {
+import * as React from "react";
+import { cn } from "../../utils/cn";
+
+function Card({ className, ...props }) {
   return (
     <div
-      className={`bg-surface border border-border shadow-soft rounded-xl overflow-hidden relative transition-shadow duration-200 hover:shadow-hover ${className}`}
+      className={cn(
+        "rounded-3xl border border-border bg-surface text-text shadow-soft transition-all duration-200",
+        className
+      )}
       {...props}
-    >
-      {children}
-    </div>
+    />
   );
 }
 
-export function CardHeader({ className = "", children }) {
+function CardHeader({ className, ...props }) {
   return (
-    <div className={`px-6 py-4 border-b border-border bg-surface ${className}`}>
-      {children}
-    </div>
+    <div
+      className={cn("flex flex-col gap-1.5 p-6 sm:p-8 border-b border-border/60", className)}
+      {...props}
+    />
   );
 }
 
-export function CardTitle({ className = "", children }) {
+function CardTitle({ className, ...props }) {
   return (
-    <h3 className={`text-lg font-semibold text-text ${className}`}>
-      {children}
-    </h3>
+    <h3
+      className={cn("text-xl sm:text-2xl font-black text-text tracking-tight", className)}
+      {...props}
+    />
   );
 }
 
-export function CardContent({ className = "", children }) {
-  return <div className={`p-6 ${className}`}>{children}</div>;
-}
-
-export function CardFooter({ className = "", children }) {
+function CardDescription({ className, ...props }) {
   return (
-    <div className={`px-6 py-4 bg-surface-secondary border-t border-border ${className}`}>
-      {children}
-    </div>
+    <p
+      className={cn("text-xs sm:text-sm text-text-muted font-medium leading-relaxed", className)}
+      {...props}
+    />
   );
 }
+
+function CardContent({ className, ...props }) {
+  return (
+    <div
+      className={cn("p-6 sm:p-8", className)}
+      {...props}
+    />
+  );
+}
+
+function CardFooter({ className, ...props }) {
+  return (
+    <div
+      className={cn("flex items-center p-6 sm:p-8 pt-0 border-t border-border/60 mt-auto", className)}
+      {...props}
+    />
+  );
+}
+
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
